@@ -38,4 +38,25 @@ describe('router', () => {
             done();
         }
     });
+
+    it('should register path', (done) => {
+        const payload = {
+            path: 'helloWorld',
+            data: 'hello socket'
+        };
+
+        const string = JSON.stringify(payload);
+
+        app.on('helloWorld', ({data, send}: IContext) => {
+            send(data);
+        });
+
+        client.send(string);
+
+        client.onmessage = ({data}) => {
+            assert.equal(data, payload.data);
+
+            done();
+        }
+    });
 });

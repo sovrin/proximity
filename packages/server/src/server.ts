@@ -16,7 +16,7 @@ const Prop = {
  * @param config
  */
 const factory = (config): IServer => {
-    const {use, on, route, open, close} = routerFactory();
+    const {on, open, close, route, register} = routerFactory();
 
     const state = {
         [Prop.SERVER]: null,
@@ -120,10 +120,10 @@ const factory = (config): IServer => {
     return {
         listen,
         kill,
-        use,
         on,
         open,
         close,
+        register
     }
 };
 

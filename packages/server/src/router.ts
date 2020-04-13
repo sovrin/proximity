@@ -1,41 +1,13 @@
+import {extname, resolve} from "path";
 import {IContext, IRouter} from "./types";
 import {Type} from "./context";
+import {load, read, stats} from "./utils";
 
 /**
  *
  */
 const factory = (): IRouter => {
     const stack = {};
-    const middlewares: Array<Function> = [];
-
-    /**
-     *
-     * @param middlewares
-     * @param handler
-     */
-    const chain = (middlewares: Array<Function>, handler: Function) => (context: IContext) => {
-        let cursor = 0;
-
-        const targets = [...middlewares, handler].filter(Boolean);
-
-        const next = () => {
-            const middleware = targets[cursor++];
-
-            if (!middleware) {
-                return;
-            }
-
-            try {
-                middleware(context, next);
-            } catch (error) {
-                console.error(error);
-
-                return;
-            }
-        };
-
-        next();
-    };
 
     /**
      *
@@ -56,50 +28,36 @@ const factory = (): IRouter => {
      * @param path
      * @param handle
      */
-    const on = (path: string, handle: Function) => {
-        const route = cursor(Type.MESSAGE, path);
-
-        if (middlewares.length) {
-            handle = chain(middlewares, handle);
-        }
-
-        stack[route] = handle;
-    };
+    const on = (path: string, handle: Function) => (
+        use(handle, path, Type.MESSAGE)
+    );
 
     /**
      *
      * @param handle
      */
-    const open = (handle: Function) => {
-        const route = cursor(Type.START);
-
-        if (middlewares.length) {
-            handle = chain(middlewares, handle);
-        }
-
-        stack[route] = handle;
-    };
+    const open = (handle: Function) => (
+        use(handle, null, Type.OPEN)
+    );
 
     /**
      *
      * @param handle
      */
-    const close = (handle: Function) => {
-        const route = cursor(Type.END);
-
-        if (middlewares.length) {
-            handle = chain(middlewares, handle);
-        }
-
-        stack[route] = handle;
-    };
+    const close = (handle: Function) => (
+        use(handle, null, Type.CLOSE)
+    );
 
     /**
      *
-     * @param middleware
+     * @param handle
+     * @param path
+     * @param type
      */
-    const use = (middleware: Function) => {
-        middlewares.push(middleware)
+    const use = (handle: Function, path?: string, type = Type.MESSAGE) => {
+        const route = cursor(type, path);
+
+        stack[route] = handle;
     };
 
     /**
@@ -129,12 +87,52 @@ const factory = (): IRouter => {
         return handle(context);
     };
 
+    /**
+     *
+     * @param base
+     */
+    const register = async (base) => {
+        base = resolve(base);
+
+        const traverse = async (path) => {
+            const absolute = resolve(path);
+
+            const bind = async (name) => {
+                const pointer = resolve(absolute, name);
+
+                if ((await stats(pointer)).isDirectory()) {
+                    return traverse(pointer);
+                }
+
+                if (extname(pointer) !== '.ts') {
+                    return;
+                }
+
+                const handle = await load(pointer);
+
+                const path = pointer
+                    .replace(base + '\\', '')
+                    .replace('.ts', '')
+                    .replace(/\\/g, '/')
+                ;
+
+                on(path, handle);
+            };
+
+            for (const file of await read(path)) {
+                await bind(file);
+            }
+        };
+
+        await traverse(base);
+    };
+
     return {
         on,
         open,
         close,
-        use,
         route,
+        register,
     }
 };
 

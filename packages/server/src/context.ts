@@ -2,9 +2,9 @@ import {IContext, IFactory} from "./types";
 import {get, set} from "./utils";
 
 export const Type = {
-    START: 'start',
+    OPEN: 'open',
     MESSAGE: 'message',
-    END: 'end',
+    CLOSE: 'close',
 };
 
 const Prop = {
@@ -30,7 +30,7 @@ const factory = (ws, req, connections): IFactory => {
         [Prop.SOCKET]: ws,
         [Prop.REQUEST]: req,
         [Prop.CONNECTIONS]: connections,
-        [Prop.TYPE]: Type.START,
+        [Prop.TYPE]: Type.OPEN,
         [Prop.MESSAGE]: null,
         [Prop.DONE]: false,
         [Prop.DATA]: null,
@@ -99,7 +99,7 @@ const factory = (ws, req, connections): IFactory => {
             (Prop.MESSAGE, null)
             (Prop.DATA, null)
             (Prop.PATH, null)
-            (Prop.TYPE, Type.END)
+            (Prop.TYPE, Type.CLOSE)
         ;
 
         return self();

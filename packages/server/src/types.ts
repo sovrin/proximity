@@ -1,4 +1,3 @@
-
 export interface IContext {
     use(prop: string, deflt?: any),
     send(...args: any),
@@ -22,16 +21,16 @@ export interface IFactory {
 export interface IServer {
     listen(),
     kill(),
-    use(middleware: Function),
     on(path: string, handle: Function),
     open(handle: Function),
     close(handle: Function),
+    register(path: string)
 }
 
 export interface IRouter {
     on(path: string, handle: Function),
     open(handle: Function),
     close(handle: Function),
-    use(middleware: Function),
     route(context: IContext),
+    register(path: string)
 }

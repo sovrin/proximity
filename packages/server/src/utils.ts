@@ -1,3 +1,37 @@
+
+const {promisify} = require('util');
+const {readdir, stat} = require('fs');
+
+/**
+ *
+ */
+export const read = promisify(readdir);
+
+/**
+ *
+ */
+export const stats = promisify(stat);
+
+/**
+ *
+ * @param path
+ */
+export const load = async (path) => {
+    let target;
+
+    try {
+        target = await import(path);
+    } catch (e) {
+        target = require(path);
+    }
+
+    if (target.default && typeof target.default === 'function') {
+        target = target.default;
+    }
+
+    return target;
+};
+
 /**
  *
  */
