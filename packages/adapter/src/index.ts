@@ -1,23 +1,30 @@
-import WebSocket from "ws";
+import {payload as payloadFactory} from '@sovrin/proximity-common';
+import {IAdapter} from "./Adapter/IAdapter";
+import Socket from "./Adapter/Socket";
 
 /**
  *
  * @constructor
  */
 const Proximity = () => {
-    const CONFIG_LOCALHOST = 'localhost';
+    const CONFIG_HOST = 'host';
     const CONFIG_PORT = 'port';
+    const CONFIG_TIMEOUT = 'timeout';
+    const CONFIG_DEBUG = 'debug';
+    const CONFIG_ADAPTER = 'adapter';
 
     const CONTEXT_PROJECT = 'project';
 
     const state = {
         stack: [],
         ready: false,
-        socket: null,
         context: {},
         config: {
-            [CONFIG_LOCALHOST]: 'localhost',
+            [CONFIG_HOST]: 'localhost',
             [CONFIG_PORT]: 3315,
+            [CONFIG_TIMEOUT]: 1,
+            [CONFIG_DEBUG]: false,
+            [CONFIG_ADAPTER]: null,
         }
     };
 
@@ -25,7 +32,11 @@ const Proximity = () => {
      *
      * @param config
      */
-    const config = (config) => {
+    const config = (config = null) => {
+        if (!config) {
+            return state.config;
+        }
+
         state.config = {
             ...state.config,
             ...config,
@@ -36,9 +47,30 @@ const Proximity = () => {
 
     /**
      *
+     * @param context
+     */
+    const context = (context = null) => {
+        if (!context) {
+            return state.context;
+        }
+
+        state.context = {
+            ...state.context,
+            ...context,
+        };
+
+        return self();
+    };
+
+    /**
+     *
      */
     const open = async () => {
-        state.socket = connect();
+        state.config.adapter = create();
+
+        if (!state.config.adapter) {
+            return;
+        }
 
         const payload = augment('push/open');
 
@@ -46,7 +78,7 @@ const Proximity = () => {
             send(payload)
         });
 
-        state.socket.onopen = () => {
+        state.config.adapter.onopen = () => {
             execute();
 
             state.ready = true;
@@ -77,8 +109,9 @@ const Proximity = () => {
         push(() => {
             send(payload);
 
-            state.socket.close();
-            state.socket = null;
+            state.config.adapter.close();
+            state.config.adapter = null;
+            state.ready = false;
         });
     };
 
@@ -98,7 +131,20 @@ const Proximity = () => {
      * @param payload
      */
     const send = (payload) => {
-        state.socket.send(payload);
+        const {
+            [CONFIG_ADAPTER]: adapter,
+            [CONFIG_DEBUG]: debug,
+        } = state.config;
+
+        try {
+            adapter.flush(payload);
+        } catch (e) {
+            if (!debug) {
+                return;
+            }
+
+            console.error(e);
+        }
     };
 
     /**
@@ -118,25 +164,40 @@ const Proximity = () => {
      * @param path
      * @param data
      */
-    const augment = (path, data = {}) => {
-        const payload = {
-            path,
-            data: {
-                data,
-                context: state.context
-            }
-        };
-
-        return JSON.stringify(payload);
-    };
+    const augment = (path, data = {}) => (
+        payloadFactory(path, {
+            data,
+            context: state.context
+        })
+    );
 
     /**
      *
      */
-    const connect = () => {
-        const {localhost, port} = state.config;
+    const create = (): IAdapter => {
+        let {
+            [CONFIG_HOST]: host,
+            [CONFIG_PORT]: port,
+            [CONFIG_ADAPTER]: adapter,
+            [CONFIG_DEBUG]: debug,
+            [CONFIG_TIMEOUT]: timeout,
+        } = state.config;
 
-        return new WebSocket(`ws://${localhost}:${port}`);
+        if (!adapter) {
+            adapter = new Socket(timeout);
+        }
+
+        try {
+            adapter.open(host, port);
+        } catch (e) {
+            if (!debug) {
+                return null;
+            }
+
+            console.error(e);
+        }
+
+        return adapter;
     };
 
     /**
@@ -152,22 +213,9 @@ const Proximity = () => {
 
     /**
      *
-     * @param values
-     */
-    const context = (values) => {
-        state.context = {
-            ...state.context,
-            ...values,
-        };
-
-        return self();
-    };
-
-    /**
-     *
      */
     const self = () => ({
-        CONFIG_LOCALHOST,
+        CONFIG_HOST,
         CONFIG_PORT,
         CONTEXT_PROJECT,
         config,
