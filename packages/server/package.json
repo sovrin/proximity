@@ -25,11 +25,13 @@
   },
   "homepage": "https://github.com/sovrin/proximity#readme",
   "devDependencies": {
+    "@sovrin/proximity-common": "*",
     "@types/mocha": "^7.0.2",
-    "@types/node": "^13.11.1",
+    "@types/node": "^13.13.5",
     "@types/ws": "*",
+    "debug": "^4.1.1",
     "mocha": "latest",
-    "ts-node": "^8.8.2",
+    "ts-node": "^8.10.1",
     "typescript": "^3.8.3",
     "ws": "latest"
   }

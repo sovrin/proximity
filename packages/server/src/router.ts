@@ -1,7 +1,10 @@
+import debug from 'debug';
 import {extname, resolve} from "path";
 import {IContext, IRouter} from "./types";
 import {Type} from "./context";
 import {load, read, stats} from "./utils";
+
+const log = debug('proximity:router');
 
 /**
  *
@@ -56,6 +59,8 @@ const factory = (): IRouter => {
      */
     const use = (handle: Function, path?: string, type = Type.MESSAGE) => {
         const route = cursor(type, path);
+
+        log(`route "${route}" registered`);
 
         stack[route] = handle;
     };
