@@ -1,5 +1,5 @@
 import server from './server';
-import {IContext, IFactory, IServer} from './types';
+import {IContext, IFactory, IServer, ISession} from './types';
 
 /**
  * User: Oleg Kamlowski <oleg.kamlowski@thomann.de>
@@ -8,6 +8,7 @@ import {IContext, IFactory, IServer} from './types';
  */
 export default server;
 export {
+    ISession,
     IContext,
     IFactory,
     IServer,

@@ -1,7 +1,5 @@
 export interface IContext {
-    use(prop: string, deflt?: any),
     send(...args: any),
-    broadcast(...args: any),
     done(),
     throw(err),
     type,
@@ -9,6 +7,7 @@ export interface IContext {
     request,
     path,
     data,
+    session: ISession,
     finished,
 }
 
@@ -16,6 +15,14 @@ export interface IFactory {
     context: IContext,
     close: Function,
     open: Function,
+}
+
+export interface ISession {
+    get(key: string),
+    set(key: string, value: any),
+    wrap(Function),
+    run(Function),
+    disable,
 }
 
 export interface IServer {

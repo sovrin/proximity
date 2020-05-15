@@ -3,6 +3,7 @@ import {uuid} from "./utils";
 import {IServer} from "./types";
 import contextFactory from './context';
 import routerFactory from './router';
+import sessionFactory from './session';
 
 const Prop = {
     ROUTER: 'router',
@@ -49,13 +50,14 @@ const factory = (config): IServer => {
          */
         const onConnection = (socket, request): void => {
             const [connections, setConnections] = update(Prop.CONNECTION);
-            const {context, close, open} = contextFactory(socket, request, connections);
+            const session = sessionFactory();
+            const {context, close, open} = contextFactory(socket, request, session);
+
+            const {wrap, run, disable} = session;
             const id = uuid();
 
             connections[id] = context;
             setConnections(connections);
-
-            route(context).catch(console.error);
 
             /**
              *
@@ -77,11 +79,16 @@ const factory = (config): IServer => {
                     delete connections[id];
 
                     setConnections(connections);
+                    disable();
                 });
             };
 
-            socket.on('message', onMessage);
-            socket.on('close', onClose);
+            run(() => {
+                route(context).catch(console.error);
+
+                socket.on('message', wrap(onMessage));
+                socket.on('close', wrap(onClose));
+            })
         };
 
         instance.on('connection', onConnection);

@@ -1,5 +1,6 @@
-import {IContext, IFactory} from "./types";
+import {IContext, IFactory, ISession} from "./types";
 import {get, set} from "./utils";
+import {IPayload} from "@sovrin/proximity-common/src/payload";
 
 export const Type = {
     OPEN: 'open',
@@ -8,7 +9,6 @@ export const Type = {
 };
 
 const Prop = {
-    CONNECTIONS: 'connections',
     TYPE: 'type',
     MESSAGE: 'message',
     DONE: 'done',
@@ -16,34 +16,31 @@ const Prop = {
     REQUEST: 'request',
     PATH: 'path',
     DATA: 'data',
-    SPACE: 'space',
+    SESSION: 'session',
 };
 
 /**
  *
  * @param ws
  * @param req
- * @param connections
+ * @param session
  */
-const factory = (ws, req, connections): IFactory => {
+const factory = (ws, req, session: ISession): IFactory => {
     const state = {
         [Prop.SOCKET]: ws,
         [Prop.REQUEST]: req,
-        [Prop.CONNECTIONS]: connections,
+        [Prop.SESSION]: session,
         [Prop.TYPE]: Type.OPEN,
         [Prop.MESSAGE]: null,
         [Prop.DONE]: false,
         [Prop.DATA]: null,
-        [Prop.SPACE]: {},
     };
 
     /**
      *
      */
     const self = (): IContext => ({
-        use,
         send,
-        broadcast,
         done,
         throw: error,
         message: get(state)([Prop.MESSAGE]),
@@ -51,20 +48,9 @@ const factory = (ws, req, connections): IFactory => {
         request: get(state)([Prop.REQUEST]),
         path: get(state)([Prop.PATH]),
         data: get(state)([Prop.DATA]),
+        session: get(state)([Prop.SESSION]),
         finished: get(state)([Prop.DONE]),
     });
-
-    /**
-     *
-     * @param prop
-     * @param deflt
-     */
-    const use = (prop: string, deflt?: any): [any, Function] => ([
-        state[Prop.SPACE][prop] || deflt,
-        (value: any) => {
-            state[Prop.SPACE][prop] = value
-        }
-    ]);
 
     /**
      *
@@ -78,7 +64,7 @@ const factory = (ws, req, connections): IFactory => {
         ;
 
         try {
-            const {path, data} = JSON.parse(message);
+            const {path, data}: IPayload = JSON.parse(message);
 
             set(state)
                 (Prop.PATH, path)
@@ -111,20 +97,6 @@ const factory = (ws, req, connections): IFactory => {
      */
     const send = (...args: any): IContext => {
         state[Prop.SOCKET].send(...args);
-
-        return self();
-    };
-
-    /**
-     *
-     * @param args
-     */
-    const broadcast = (...args: any): IContext => {
-        const {connections} = state;
-
-        for (const connection of Object.values(connections)) {
-            connection[Prop.SOCKET].send(...args);
-        }
 
         return self();
     };
