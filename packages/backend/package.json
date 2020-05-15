@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "test": "ts-node node_modules/tape/bin/tape tests/**/*.ts",
-    "dev": "ts-node src/index.ts"
+    "dev": "set DEBUG=proximity:* && ts-node src/index.ts"
   },
   "files": [
     "lib"
@@ -27,10 +27,11 @@
   "homepage": "https://github.com/sovrin/proximity-backend#readme",
   "devDependencies": {
     "@sovrin/proximity-server": "*",
-    "@types/node": "^13.11.1",
-    "ts-node": "^8.8.2",
-    "typescript": "^3.8.3",
+    "@types/mocha": "^7.0.2",
+    "@types/node": "^13.13.5",
+    "debug": "^4.1.1",
     "mocha": "latest",
-    "@types/mocha": "^7.0.2"
+    "ts-node": "^8.10.1",
+    "typescript": "^3.8.3"
   }
 }
