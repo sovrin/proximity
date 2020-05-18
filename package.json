@@ -4,9 +4,12 @@
   "scripts": {
     "frontend:dev": "lerna run --stream --no-prefix --scope @sovrin/proximity-frontend dev",
     "frontend:build": "lerna run --stream --no-prefix --scope @sovrin/proximity-frontend build",
+    "backend:dev": "lerna run --stream --no-prefix --scope @sovrin/proximity-backend dev",
     "backend:build": "lerna run --stream --no-prefix --scope @sovrin/proximity-backend build",
     "server:build": "lerna run --stream --no-prefix --scope @sovrin/proximity-server build",
     "adapter:build": "lerna run --stream --no-prefix --scope @sovrin/proximity-adapter build",
+    "adapter:dev": "lerna run --stream --no-prefix --scope @sovrin/proximity-adapter dev",
+    "adapter:test": "lerna run --stream --no-prefix --scope @sovrin/proximity-adapter test",
     "bootstrap": "lerna bootstrap --hoist",
     "clean": "lerna clean --yes"
   },
