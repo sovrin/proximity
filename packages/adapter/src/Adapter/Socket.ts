@@ -53,6 +53,14 @@ export default class Socket implements IAdapter {
 
     /**
      *
+     * @param callback
+     */
+    public ready(callback) {
+        this.connection.onopen = callback;
+    }
+
+    /**
+     *
      */
     public close() {
         this.connection.close();

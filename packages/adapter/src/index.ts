@@ -67,22 +67,20 @@ const Proximity = () => {
      */
     const open = async () => {
         state.config.adapter = create();
+        state.config.adapter.ready(() => {
+            execute();
+            state.ready = true;
+        });
 
         if (!state.config.adapter) {
             return;
         }
 
-        const payload = augment('push/open');
+        const payload = augment('open');
 
         push(() => {
             send(payload)
         });
-
-        state.config.adapter.onopen = () => {
-            execute();
-
-            state.ready = true;
-        };
 
         return self();
     };
@@ -91,7 +89,7 @@ const Proximity = () => {
      *
      */
     const message = async (message) => {
-        const payload = augment('push/data', {message});
+        const payload = augment('data', {message});
 
         push(() => {
             send(payload);
@@ -104,7 +102,7 @@ const Proximity = () => {
      *
      */
     const close = async () => {
-        const payload = augment('push/close');
+        const payload = augment('close');
 
         push(() => {
             send(payload);
@@ -119,7 +117,7 @@ const Proximity = () => {
      *
      */
     const flag = async (name) => {
-        const payload = augment('push/flag', {name});
+        const payload = augment('flag', {name});
 
         push(() => {
             send(payload)
