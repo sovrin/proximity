@@ -43,6 +43,7 @@ const factory = (ws, req, session: ISession): IFactory => {
         send,
         done,
         throw: error,
+        socket: get(state)([Prop.SOCKET]),
         message: get(state)([Prop.MESSAGE]),
         type: get(state)([Prop.TYPE]),
         request: get(state)([Prop.REQUEST]),

@@ -34,6 +34,16 @@ const factory = () :ISession => {
 
     /**
      *
+     * @param key
+     */
+    const unset = (key) => {
+        const store: any = als.getStore();
+
+        store.delete(key);
+    }
+
+    /**
+     *
      * @param fn
      */
     const wrap = (fn) => (...args) => {
@@ -42,6 +52,13 @@ const factory = () :ISession => {
         return fn(...args);
     }
 
+    /**
+     *
+     * @param store
+     */
+    const include = (store) => (
+        als.enterWith(store)
+    )
     /**
      *
      * @param callback
@@ -60,7 +77,9 @@ const factory = () :ISession => {
     return {
         run,
         set,
+        unset,
         get,
+        include,
         wrap,
         disable,
     };
