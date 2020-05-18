@@ -1,8 +1,4 @@
 import React, {Children} from 'react';
-import Header from 'components/templates/Header';
-import Sidebar from 'components/templates/Sidebar';
-import Overlay from 'components/templates/Overlay';
-import Content from 'components/templates/Content';
 import Provider from 'contexts/Page';
 import Root from 'styles/atoms/Page.style';
 import useTheme from 'hooks/useTheme';
@@ -13,8 +9,6 @@ import useTheme from 'hooks/useTheme';
  * @constructor
  */
 const Page = ({children}) => {
-    useTheme();
-
     const data = {};
 
     Children.forEach(children, (child) => {
@@ -24,24 +18,17 @@ const Page = ({children}) => {
         data[key] = child;
     });
 
-    const {header, sidebar, content} = data;
+    const {header, sidebar, content, overlay} = data;
+
+    useTheme();
 
     return (
         <Provider>
             <Root sidebar>
-                <Header>
-                    {header}
-                </Header>
-
-                <Sidebar>
-                    {sidebar}
-                </Sidebar>
-
-                <Overlay/>
-
-                <Content>
-                    {content}
-                </Content>
+                {header}
+                {sidebar}
+                {overlay}
+                {content}
             </Root>
         </Provider>
     );

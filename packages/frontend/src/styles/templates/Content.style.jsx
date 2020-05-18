@@ -11,7 +11,7 @@ const Root = styled(Content)`
     
     @media (max-width: ${Breakpoint.MD}) {
         width: 100%;
-        margin-top: calc(var(--unit-6) * 2);
+        margin-top: calc(var(--unit-10) * 2);
     }
 `;
 

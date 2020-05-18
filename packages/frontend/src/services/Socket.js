@@ -9,7 +9,7 @@ export default (destination, protocol) => (
     new Promise((resolve, reject) => {
 
         const timeout = setTimeout(() => {
-            reject('connection timed out');
+            reject(new TimeOutException());
         }, TIMEOUT);
 
         const socket = new WebSocket(destination, protocol);
@@ -36,4 +36,13 @@ export default (destination, protocol) => (
         socket.addEventListener('open', onOpen);
         socket.addEventListener('error', onError);
     })
-)
+);
+
+/**
+ * User: Oleg Kamlowski <oleg.kamlowski@thomann.de>
+ * Date: 18.05.2020
+ * Time: 21:04
+ */
+export class TimeOutException extends Error {
+    //
+}

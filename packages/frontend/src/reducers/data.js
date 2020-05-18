@@ -13,13 +13,7 @@ export default (state, {type, value}) => {
     switch (type) {
         case Action.UPDATE:
             return produce(state, draft => {
-                const {context: {project}, data} = value;
-
-                if (!draft[project]) {
-                    draft[project] = [];
-                }
-
-                draft[project].push(data);
+                draft.push(value);
 
                 return draft;
             });

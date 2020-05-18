@@ -5,7 +5,7 @@ import {Sidebar} from '@thomann/spectre-react-components/OffCanvas';
  *
  */
 const Root = styled(Sidebar)`
-     width: 12rem
+     width: 6rem
 `;
 
 /**

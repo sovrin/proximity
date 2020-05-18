@@ -13,7 +13,7 @@ const {Provider} = Context;
  */
 export default ({children}) => {
     const register = usePublication('register');
-    const [data, dispatch] = useReducer(dataReducer, {});
+    const [data, dispatch] = useReducer(dataReducer, []);
 
     /**
      *

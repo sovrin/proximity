@@ -1,8 +1,16 @@
-import React, {createContext, useEffect} from 'react';
-import socketFactory from 'services/Socket';
+import React, {createContext, useEffect, useState} from 'react';
+import socketFactory, {TimeOutException} from 'services/Socket';
 
 export const Context = createContext(false);
 const {Provider} = Context;
+
+export const Status = {
+    IDLE: 'idle',
+    CONNECTING: 'connecting',
+    CONNECTED: 'connected',
+    TIMED_OUT: 'timed_out',
+    ERROR: 'error',
+}
 
 /**
  * User: Oleg Kamlowski <oleg.kamlowski@thomann.de>
@@ -11,6 +19,7 @@ const {Provider} = Context;
  */
 export default ({children}) => {
     // const {host, protocol} = document.location;
+    const [status, setStatus] = useState(Status.IDLE);
     let subscriptions = [];
     let connection;
 
@@ -133,16 +142,27 @@ export default ({children}) => {
     const value = {
         subscribe,
         publish,
+        status,
+        endpoint
     };
 
     useEffect(() => {
+        setStatus(Status.CONNECTING);
+
         const connect = async () => {
             try {
                 connection = await socketFactory(endpoint, 'proximity');
 
                 execute();
                 bind(subscriptions);
+                setStatus(Status.CONNECTED);
             } catch (e) {
+                if (e instanceof TimeOutException) {
+                    setStatus(Status.TIMED_OUT);
+                } else {
+                    setStatus(Status.ERROR);
+                }
+
                 console.error(e);
             }
         };
