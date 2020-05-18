@@ -20,6 +20,7 @@ module.exports = {
         contentBase: DIST,
         hot: true,
         disableHostCheck: true,
+        historyApiFallback: true,
     },
     devtool: 'eval-source-map',
     plugins: [

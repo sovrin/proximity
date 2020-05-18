@@ -7,6 +7,7 @@ const STYLES = resolve(SRC, 'styles');
 const HOOKS = resolve(SRC, 'hooks');
 const REDUCERS = resolve(SRC, 'reducers');
 const CONTEXTS = resolve(SRC, 'contexts');
+const SERVICES = resolve(SRC, 'services');
 
 const utils = resolve(SRC, 'utils.js');
 
@@ -33,6 +34,7 @@ module.exports = {
             reducers: REDUCERS,
             contexts: CONTEXTS,
             static: STATIC,
+            services: SERVICES,
         },
         modules: ['src', 'node_modules'],
         extensions: ['.js', '.jsx'],

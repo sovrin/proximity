@@ -1,9 +1,13 @@
 import React from 'react';
-import App from './components/App';
+import {render} from 'react-dom';
+import Proximity from './components/Proximity';
 
 /**
  * User: Oleg Kamlowski <oleg.kamlowski@thomann.de>
- * Date: 09.04.2020
- * Time: 21:48
+ * Date: 18.05.2020
+ * Time: 19:09
  */
-export default App
+render(
+    <Proximity/>,
+    document.getElementById('proximity'),
+);
