@@ -1,6 +1,7 @@
 import React from 'react';
 import Entry from './Entry';
 import useCollector from 'hooks/useCollector';
+import Root, {Body} from 'styles/pages/content/Feed/Entries.style';
 
 /**
  *
@@ -12,9 +13,11 @@ const Entries = () => {
     const children = data.map(Entry);
 
     return (
-        <div>
-            {children}
-        </div>
+        <Root>
+            <Body>
+                {children}
+            </Body>
+        </Root>
     );
 };
 

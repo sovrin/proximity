@@ -1,11 +1,36 @@
 import styled from 'styled-components';
-import {Sidebar} from '@thomann/spectre-react-components/OffCanvas';
+import {Breakpoint} from 'hooks/useTheme';
 
 /**
  *
  */
-const Root = styled(Sidebar)`
-     width: 6rem
+const Root = styled('div')`
+    grid-template-rows: min-content;
+    grid-template-columns: min-content auto;
+    padding: var(--spacing);
+    grid-area: sidebar;
+    min-width: auto;
+    max-height: 100vh;
+    transform: none;
+    color: var(--white);
+    background: var(--accent);
+    z-index: 10;
+    display: grid;
+    
+     grid-template-areas:
+       "logo switch"
+       "version version";
+
+    @media (max-width: ${Breakpoint.MD}) {
+        grid-area: content;
+        position: relative;
+        left: 0;
+        
+        ${({collapsed}) => collapsed && `
+            left: -100%;
+        `}
+    }    
+}
 `;
 
 /**

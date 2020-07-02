@@ -28,7 +28,7 @@ export default ({children}) => {
      * @param data
      */
     const onRegister = (data) => {
-        console.info('reg', data);
+        // console.info('reg', data);
     };
 
     useSubscription('data', onData);

@@ -27,12 +27,12 @@
   "devDependencies": {
     "@sovrin/proximity-common": "*",
     "@types/mocha": "^7.0.2",
-    "@types/node": "^14.0.1",
+    "@types/node": "^14.0.11",
     "@types/ws": "*",
     "debug": "^4.1.1",
     "mocha": "latest",
-    "ts-node": "^8.10.1",
-    "typescript": "^3.9.2",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.5",
     "ws": "latest"
   }
 }

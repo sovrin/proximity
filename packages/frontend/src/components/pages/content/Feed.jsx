@@ -2,6 +2,7 @@ import React from 'react';
 import Menu, {Divider} from '@thomann/spectre-react-components/Menu';
 import Entries from './Feed/Entries';
 import Projects from './Feed/Projects';
+import Sink from './Sink';
 
 /**
  *
@@ -12,12 +13,14 @@ const Feed = () => {
 
     return (
         <Menu>
-            <Projects />
-            <Divider>
-                Feed
-            </Divider>
+            <Sink>
+                <Projects />
+                <Divider>
+                    Feed
+                </Divider>
 
-            <Entries/>
+                <Entries/>
+            </Sink>
         </Menu>
     );
 };

@@ -4,11 +4,6 @@ import styled from 'styled-components';
  *
  */
 const Root = styled('div')`
-    color: #5755d9;
-    height: 2rem;
-    left: 1.5rem;
-    position: fixed;
-    top: .85rem;
 `;
 
 /**

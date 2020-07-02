@@ -9,7 +9,7 @@ import Root from 'styles/templates/Content.style';
  */
 const Content = ({children}) => (
     <Root>
-        <Container size={Container.Size.MEDIUM}>
+        <Container size={Container.Size.LARGE}>
             {children}
         </Container>
     </Root>

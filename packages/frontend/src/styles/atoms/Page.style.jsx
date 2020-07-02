@@ -1,11 +1,23 @@
 import styled from 'styled-components';
-import Element from '@thomann/spectre-react-components/OffCanvas';
+import {Breakpoint} from 'hooks/useTheme';
 
 /**
  *
  */
-const Root = styled(Element)`
-    min-height: 100vh
+const Root = styled('div')`
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: min-content auto;
+    grid-template-areas: "sidebar content";
+    grid-gap: var(--spacing);
+    max-height: 100vh;
+    height: 100vh;
+    background: var(--white);
+
+    @media (max-width: ${Breakpoint.MD}) {
+        grid-template-areas: "content content";
+    }
+
 `;
 
 /**
