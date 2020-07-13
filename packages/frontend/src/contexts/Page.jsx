@@ -11,9 +11,16 @@ const {Provider} = Context;
  */
 export default ({children}) => {
     const [id, setId] = useState(null);
+    const [collapsed, setCollapsed] = useState(true);
+
+    const toggleSidebar = () => {
+        setCollapsed(!collapsed);
+    }
 
     const context = {
         id,
+        collapsed,
+        toggleSidebar
     };
 
     useEffect(() => {

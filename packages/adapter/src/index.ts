@@ -203,9 +203,9 @@ const Proximity = () => {
      */
     const execute = () => {
         while (state.stack.length) {
-            const fn = state.stack.shift();
+            const callback = state.stack.shift();
 
-            fn();
+            callback();
         }
     };
 

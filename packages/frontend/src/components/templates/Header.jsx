@@ -1,6 +1,5 @@
 import React from 'react';
-import Toggle from './header/Toggle';
-import Controls from './header/Controls';
+import Container from '@thomann/spectre-react-components/Container';
 import Root from 'styles/templates/Header.style';
 
 /**
@@ -10,9 +9,9 @@ import Root from 'styles/templates/Header.style';
  */
 const Header = ({children}) => (
     <Root>
-        <Toggle/>
-        {children}
-        {/*<Controls/>*/}
+        <Container size={Container.Size.LARGE}>
+            {children}
+        </Container>
     </Root>
 );
 

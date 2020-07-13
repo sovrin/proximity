@@ -1,7 +1,7 @@
 import React from 'react';
 import Tabs from '@thomann/spectre-react-components/Tabs';
 import Project from './Project';
-import useCollector from 'hooks/useCollector';
+import useSelector from 'hooks/useSelector';
 
 /**
  *
@@ -9,42 +9,22 @@ import useCollector from 'hooks/useCollector';
  * @constructor
  */
 const Projects = () => {
-    const data = useCollector();
+    const meta = useSelector();
+    const projects = Object.keys(meta);
 
     /**
      *
-     * @param acc
-     * @param context
-     * @returns {*}
+     * @param project
+     * @returns {{namespace: *, count: number, key: *}}
      */
-    const accumulate = (acc, {context}) => {
-        const {project} = context;
+    const build = (project) => ({
+        key: project,
+        namespace: project,
+        length: meta[project].length,
+    });
 
-        if (acc.includes(project)) {
-            return acc;
-        }
-
-        acc.push(project);
-
-        return acc;
-    };
-
-    /**
-     *
-     * @param acc
-     * @param value
-     * @returns {*}
-     */
-    const build = (acc, value) => {
-        acc.push({
-            namespace: value,
-        });
-
-        return acc;
-    };
-
-    const children = data.reduce(accumulate, [])
-        .reduce(build, [])
+    const children = projects
+        .map(build)
         .map(Project)
     ;
 

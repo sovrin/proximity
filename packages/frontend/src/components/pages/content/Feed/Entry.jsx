@@ -1,4 +1,5 @@
 import React from 'react';
+import Root, {Column} from 'styles/pages/content/Feed/Entry.style';
 
 /**
  *
@@ -9,9 +10,11 @@ import React from 'react';
  */
 const Entry = ({data, context}) => {
     return (
-        <div key={data.message}>
-            {data.message}
-        </div>
+        <Root key={data.message}>
+            <Column>
+                {data.message}
+            </Column>
+        </Root>
     );
 };
 

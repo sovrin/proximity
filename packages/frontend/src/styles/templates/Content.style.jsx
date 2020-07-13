@@ -5,14 +5,13 @@ import {Breakpoint} from 'hooks/useTheme';
 /**
  *
  */
-const Root = styled(Content)`
-    flex: 1 1 auto;
+const Root = styled('div')`
+    //grid-area: content;
     padding: 0 !important;
-    
-    @media (max-width: ${Breakpoint.MD}) {
-        width: 100%;
-        margin-top: calc(var(--unit-10) * 2);
-    }
+    max-height: 100vh;
+        //transition: all 0.4s;
+    grid-area: content;
+    align-items: start;
 `;
 
 /**

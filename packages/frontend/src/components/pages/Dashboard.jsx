@@ -1,11 +1,10 @@
 import React from 'react';
 import Page from 'components/atoms/Page';
 import Content from 'components/templates/Content';
-import Header from 'components/templates/Header';
-import Overlay from 'components/templates/Overlay';
 import Sidebar from 'components/templates/Sidebar';
 import Feed from './content/Feed';
-import Logo from './content/Logo';
+import Logo from './header/Logo';
+import Version from './header/Version';
 
 /**
  *
@@ -14,13 +13,13 @@ import Logo from './content/Logo';
  */
 const Dashboard = () => (
     <Page>
-        <Header/>
-        <Sidebar/>
-        <Content>
+        <Sidebar>
             <Logo/>
+            <Version/>
+        </Sidebar>
+        <Content>
             <Feed/>
         </Content>
-        <Overlay/>
     </Page>
 );
 
