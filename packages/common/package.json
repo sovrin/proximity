@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sovrin/proximity-common.git"
+    "url": "git+https://github.com/sovrin/proximity.git"
   },
   "author": {
     "name": "Oleg Kamlowski",
@@ -17,7 +17,7 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/sovrin/proximity-common/issues"
+    "url": "https://github.com/sovrin/proximity/issues"
   },
-  "homepage": "https://github.com/sovrin/proximity-common#readme"
+  "homepage": "https://github.com/sovrin/proximity#readme"
 }

@@ -14,7 +14,7 @@
   "types": "lib/types/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sovrin/proximity-backend.git"
+    "url": "git+https://github.com/sovrin/proximity.git"
   },
   "author": {
     "name": "Oleg Kamlowski",
@@ -22,9 +22,9 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/sovrin/proximity-backend/issues"
+    "url": "https://github.com/sovrin/proximity/issues"
   },
-  "homepage": "https://github.com/sovrin/proximity-backend#readme",
+  "homepage": "https://github.com/sovrin/proximity#readme",
   "devDependencies": {
     "@sovrin/proximity-server": "*",
     "@types/mocha": "^7.0.2",

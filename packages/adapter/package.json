@@ -13,7 +13,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sovrin/proximity.git"
+    "url": "git+https://github.com/sovrin/proximity-adapter.git"
   },
   "author": {
     "name": "Oleg Kamlowski",
@@ -21,9 +21,9 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/sovrin/proximity/issues"
+    "url": "https://github.com/sovrin/proximity-adapter/issues"
   },
-  "homepage": "https://github.com/sovrin/proximity#readme",
+  "homepage": "https://github.com/sovrin/proximity-adapter#readme",
   "devDependencies": {
     "@sovrin/proximity-common": "*",
     "@types/mocha": "^7.0.2",
