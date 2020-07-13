@@ -7,9 +7,15 @@ import {Context} from 'contexts/Page';
  * Time: 23:51
  */
 export default () => {
-    const {id} = useContext(Context);
+    const {
+        id,
+        collapsed,
+        toggleSidebar,
+    } = useContext(Context);
 
     return {
         id,
+        collapsed,
+        toggleSidebar,
     };
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-import Brand from './sidebar/Brand';
 import Root from 'styles/templates/Sidebar.style';
 import usePage from 'hooks/usePage';
 
@@ -10,11 +9,13 @@ import usePage from 'hooks/usePage';
  * @constructor
  */
 const Sidebar = ({children}) => {
-    const {id} = usePage();
+    const {id, collapsed} = usePage();
 
     return (
-        <Root id={id}>
-            <Brand/>
+        <Root
+            id={id}
+            collapsed={collapsed}
+        >
             {children}
         </Root>
     );

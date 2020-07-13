@@ -2,6 +2,7 @@ import React, {Children} from 'react';
 import Provider from 'contexts/Page';
 import Root from 'styles/atoms/Page.style';
 import useTheme from 'hooks/useTheme';
+import Sprite from './Sprite';
 
 /**
  *
@@ -24,6 +25,7 @@ const Page = ({children}) => {
 
     return (
         <Provider>
+            <Sprite path="/sprite.svg"/>
             <Root sidebar>
                 {header}
                 {sidebar}

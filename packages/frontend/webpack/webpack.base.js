@@ -20,6 +20,14 @@ module.exports = {
                 exclude: /node_modules/,
             },
             {
+                test: /\.s[ac]ss$/i,
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    'sass-loader',
+                ],
+            },
+            {
                 test: /\.css$/i,
                 use: ['style-loader', 'css-loader'],
             },
@@ -37,7 +45,7 @@ module.exports = {
             services: SERVICES,
         },
         modules: ['src', 'node_modules'],
-        extensions: ['.js', '.jsx'],
+        extensions: ['.js', '.jsx', '.scss'],
         mainFiles: ['index'],
     },
 };
