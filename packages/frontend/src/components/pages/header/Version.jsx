@@ -8,7 +8,11 @@ import Root from 'styles/pages/header/Version.style';
  * @constructor
  */
 const Version = () => {
-    const {version} = useSettings();
+    const {version, switch: collapsed} = useSettings();
+
+    if (collapsed) {
+        return null;
+    }
 
     return (
         <Root>{version}</Root>

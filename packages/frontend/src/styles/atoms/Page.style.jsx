@@ -12,6 +12,7 @@ const Root = styled('div')`
     grid-gap: var(--spacing);
     max-height: 100vh;
     height: 100vh;
+    overflow-y: auto;
     background: var(--white);
 
     @media (max-width: ${Breakpoint.MD}) {

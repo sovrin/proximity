@@ -36,9 +36,8 @@ const Root = styled(Menu)`
     align-content: center;
     min-width: auto;
     transform: none;
-    //max-width: var(--unit-2);
-    
-        grid-area: logo;
+    padding: var(--spacing-sm);
+    grid-area: logo;
 `;
 
 /**

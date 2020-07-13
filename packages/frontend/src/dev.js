@@ -6,6 +6,7 @@ import pkg from '../package.json';
 
 const settings = {
     version: pkg.version,
+    namespace: 'proximity'
 };
 
 render(

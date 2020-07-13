@@ -5,6 +5,10 @@ import {Breakpoint} from 'hooks/useTheme';
  *
  */
 const Root = styled('div')`
+    display: grid;
+    grid-template-areas:
+        "logo"
+        "version";
     grid-template-rows: min-content;
     grid-template-columns: min-content auto;
     padding: var(--spacing);
@@ -15,11 +19,6 @@ const Root = styled('div')`
     color: var(--white);
     background: var(--accent);
     z-index: 10;
-    display: grid;
-    
-     grid-template-areas:
-       "logo switch"
-       "version version";
 
     @media (max-width: ${Breakpoint.MD}) {
         grid-area: content;
@@ -30,8 +29,7 @@ const Root = styled('div')`
             left: -100%;
         `}
     }    
-}
-`;
+}`;
 
 /**
  * User: Oleg Kamlowski <oleg.kamlowski@thomann.de>

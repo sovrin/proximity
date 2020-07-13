@@ -1,23 +1,18 @@
-import useSettings from './useSettings';
-
 /**
  * User: Oleg Kamlowski <oleg.kamlowski@thomann.de>
  * Date: 07.06.2019
  * Time: 18:09
  */
-export default (mod) => {
-    const {version, namespace} = useSettings();
-    const cursor = `${namespace}:${version}`;
-
+export default (cursor, module) => {
     /**
      *
      * @param key
      * @returns {null|*}
      */
-    const load = (key) => {
+    const load = (key = null) => {
         const json = localStorage.getItem(cursor) || '{}';
         const store = JSON.parse(json);
-        const {[mod]: context} = store;
+        const {[module]: context} = store;
 
         if (!context) {
             return null;
@@ -38,11 +33,11 @@ export default (mod) => {
         const json = localStorage.getItem(cursor) || '{}';
         const store = JSON.parse(json);
 
-        if (!store[mod]) {
-            store[mod] = {};
+        if (!store[module]) {
+            store[module] = {};
         }
 
-        store[mod][key] = value;
+        store[module][key] = value;
 
         const string = JSON.stringify(store);
         localStorage.setItem(cursor, string);

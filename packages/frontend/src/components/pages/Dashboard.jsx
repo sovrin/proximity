@@ -5,7 +5,6 @@ import Sidebar from 'components/templates/Sidebar';
 import Feed from './content/Feed';
 import Logo from './header/Logo';
 import Version from './header/Version';
-import Switch from './header/Switch';
 
 /**
  *
@@ -16,7 +15,6 @@ const Dashboard = () => (
     <Page>
         <Sidebar>
             <Logo/>
-            <Switch/>
             <Version/>
         </Sidebar>
         <Content>

@@ -1,4 +1,5 @@
 import React, {createContext, useEffect, useState} from 'react';
+import {produce} from 'immer';
 import useLocalStorage from 'hooks/useLocalStorage';
 
 export const Context = createContext(false);
@@ -10,42 +11,64 @@ const {Provider} = Context;
  * Time: 17:13
  */
 export default ({children, ...data}) => {
-    const {version} = data;
-    const key = 'proximity:' + (version || '');
-    const {load, save} = useLocalStorage(key);
     const [state, setState] = useState(data);
+    const {version, namespace} = state;
+    const cursor = `${namespace}:${version}`;
+    const {load, save} = useLocalStorage(cursor, 'settings');
 
     /**
      *
      * @param key
      * @returns {*}
      */
-    const get = (key) => {
-        return load(key);
-    }
+    const get = (key) => load(key)
 
     /**
-     * 
-     * @type {{}}
+     *
+     * @param key
+     * @param value
+     * @returns {*}
      */
     const set = (key, value) => {
-        setState((old) => {
-            old[key] = value;
+        setState(produce(state, draft => {
+            draft[key] = value;
 
-            return old;
-        });
+            return draft;
+        }));
 
         return save(key, value);
     }
 
-    useEffect(() => {
+    /**
+     *
+     * @param key
+     * @param value
+     * @returns {*}
+     */
+    const invoke = (key, value = undefined) => (
+        (value === undefined)
+            ? get(key)
+            : set(key, value)
+    )
 
-    },[])
+    useEffect(() => {
+        if (!cursor) {
+            return;
+        }
+
+        setState(produce(state, () => {
+            return {
+                ...state,
+                ...load()
+            };
+        }));
+    }, [cursor])
 
     const value = {
         ...state,
         get,
         set,
+        invoke,
     };
     
     return (

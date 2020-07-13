@@ -4,11 +4,12 @@ import styled from 'styled-components';
  *
  */
 const Root = styled('span')`
-    color: var(--black-l);
-        grid-area: version;
-
-    //pos
-    //font-size: small;
+    color: var(--white);
+    grid-area: version;
+    font-size: small;
+    font-style: italic;
+    text-align: center;
+    align-self: flex-end;
 `;
 
 /**

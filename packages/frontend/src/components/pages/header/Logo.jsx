@@ -1,9 +1,7 @@
 import React from 'react';
 import Button from '@thomann/spectre-react-components/Button';
-// import Avatar from '@thomann/spectre-react-components/Avatar';
-// import Connection from './Connection';
 import Root, {Icon, Box, Name} from 'styles/pages/header/Logo.style';
-import useSettings from '../../../hooks/useSettings';
+import useSettings, {Settings} from 'hooks/useSettings';
 
 /**
  *
@@ -11,14 +9,19 @@ import useSettings from '../../../hooks/useSettings';
  * @constructor
  */
 const Logo = () => {
-    const [data] = useSettings();
-    const {switch: collapsed} = data;
+    const {switch: collapsed, invoke} = useSettings();
 
-console.info(data);
+    /**
+     *
+     */
+    const onToggle = () => {
+        invoke(Settings.SWITCH, !invoke(Settings.SWITCH));
+    };
 
     return (
         <Root>
             <Box
+                onClick={onToggle}
                 size={Button.Size.SMALL}
                 primary
             >
@@ -31,11 +34,6 @@ console.info(data);
             {(!collapsed) && (
                 <Name>Proximity</Name>
             )}
-
-
-            {/*<Avatar size={Avatar.Size.SMALL}>*/}
-            {/*    <Connection/>*/}
-            {/*</Avatar>*/}
         </Root>
     );
 };
