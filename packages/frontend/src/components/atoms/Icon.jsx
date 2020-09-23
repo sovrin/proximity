@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from '@thomann/classnames';
 import Root from 'styles/atoms/Icon.style';
 
@@ -11,6 +12,10 @@ import Root from 'styles/atoms/Icon.style';
  * @constructor
  */
 const Icon = ({className, type, size}) => {
+    Icon.propTypes = {
+        type: PropTypes.string.isRequired
+    };
+
     const href = `#entypo-${type}`;
 
     className = classNames({

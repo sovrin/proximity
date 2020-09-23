@@ -15,7 +15,7 @@ const Version = () => {
     }
 
     return (
-        <Root>{version}</Root>
+        <Root>v{version}</Root>
     );
 };
 

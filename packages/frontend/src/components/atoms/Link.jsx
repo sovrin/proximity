@@ -1,16 +1,24 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import classNames from '@thomann/classnames';
 import useRouter from 'hooks/useRouter';
 
 /**
  *
+ * @param className
  * @param onClick
  * @param children
+ * @param href
  * @param _rest
  * @returns {*}
  * @constructor
  */
-export const Link = ({onClick, children, ..._rest}) => {
-    const {push} = useRouter();
+export const Link = ({className, onClick, children, href, ..._rest}) => {
+    Link.propTypes = {
+        href: PropTypes.string
+    }
+
+    const {push, route} = useRouter();
 
     /**
      *
@@ -23,9 +31,15 @@ export const Link = ({onClick, children, ..._rest}) => {
         onClick && onClick(e);
     };
 
+    className = classNames(className, {
+        active: href === route
+    })
+
     return (
         <a
+            className={className}
             onClick={handleClick}
+            href={href}
             {..._rest}
         >
             {children}

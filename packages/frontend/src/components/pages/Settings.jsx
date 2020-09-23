@@ -2,18 +2,16 @@ import React from 'react';
 import Page from 'components/atoms/Page';
 import Content from 'components/templates/Content';
 import Sidebar from 'components/templates/Sidebar';
-import Router from 'contexts/Router';
 import Logo from './header/Logo';
 import Version from './header/Version';
 import Navigation from './header/Navigation';
-import routes from './Dashboard/routes';
 
 /**
  *
  * @returns {*}
  * @constructor
  */
-const Dashboard = () => (
+const Settings = () => (
     <Page>
         <Sidebar>
             <Logo/>
@@ -21,14 +19,14 @@ const Dashboard = () => (
             <Version/>
         </Sidebar>
         <Content>
-            <Router routes={routes}/>
+            settings
         </Content>
     </Page>
 );
 
 /**
  * User: Oleg Kamlowski <oleg.kamlowski@thomann.de>
- * Date: 18.05.2020
- * Time: 19:15
+ * Date: 23.09.2020
+ * Time: 23:29
  */
-export default Dashboard;
+export default Settings;

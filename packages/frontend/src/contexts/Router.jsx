@@ -126,6 +126,7 @@ export default ({routes}) => {
 
     const context = {
         push,
+        route: window.location.pathname || '/'
     };
 
     return (

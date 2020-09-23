@@ -10,6 +10,7 @@ const Root = styled('span')`
     font-style: italic;
     text-align: center;
     align-self: flex-end;
+    opacity: 0.5;
 `;
 
 /**

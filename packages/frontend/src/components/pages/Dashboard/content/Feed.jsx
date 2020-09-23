@@ -9,21 +9,17 @@ import Sink from './Sink';
  * @returns {*}
  * @constructor
  */
-const Feed = () => {
-
-    return (
-        <Menu>
-            <Sink>
-                <Projects />
-                <Divider>
-                    Feed
-                </Divider>
-
-                <Entries/>
-            </Sink>
-        </Menu>
-    );
-};
+const Feed = () => (
+    <Menu>
+        <Sink>
+            <Projects/>
+            <Divider>
+                Feed
+            </Divider>
+            <Entries/>
+        </Sink>
+    </Menu>
+);
 
 /**
  * User: Oleg Kamlowski <oleg.kamlowski@thomann.de>

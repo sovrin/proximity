@@ -8,6 +8,7 @@ const Root = styled('div')`
     display: grid;
     grid-template-areas:
         "logo"
+        "navigation"
         "version";
     grid-template-rows: min-content;
     grid-template-columns: min-content auto;
@@ -19,7 +20,16 @@ const Root = styled('div')`
     color: var(--white);
     background: var(--accent);
     z-index: 10;
-
+    
+    > * {
+        margin-bottom: var(--spacing); 
+        
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+    
+    
     @media (max-width: ${Breakpoint.MD}) {
         grid-area: content;
         position: relative;

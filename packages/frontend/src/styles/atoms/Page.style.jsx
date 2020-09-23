@@ -18,7 +18,6 @@ const Root = styled('div')`
     @media (max-width: ${Breakpoint.MD}) {
         grid-template-areas: "content content";
     }
-
 `;
 
 /**
