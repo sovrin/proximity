@@ -1,0 +1,36 @@
+{
+  "name": "@sovrin/proximity-database",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.ts",
+  "private": true,
+  "scripts": {
+    "start": "ts-node -r dotenv/config -r tsconfig-paths/register index.ts",
+    "test": "mocha -r ts-node/register -r tsconfig-paths/register test/**/*.test.ts",
+    "coverage": "nyc npm run test"
+  },
+  "nyc": {
+    "extension": [
+      ".ts",
+      ".tsx"
+    ],
+    "exclude": [
+      "test",
+      "**/*.d.ts"
+    ],
+    "reporter": [
+      "html"
+    ]
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ts-node": "^9.0.0",
+    "tsconfig-paths": "^3.9.0",
+    "typescript": "^4.0.3"
+  },
+  "devDependencies": {
+    "mocha": "^8.1.3",
+    "nyc": "^15.1.0"
+  }
+}

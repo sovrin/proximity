@@ -1,0 +1,5 @@
+.nyc_output
+/coverage
+
+/tests/adapters/bar.json
+/tests/adapters/non-existent.json
