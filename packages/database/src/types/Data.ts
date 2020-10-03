@@ -5,7 +5,7 @@ export type Entry<T> = T & {
 
 export type Data<T> = {
     name?: string,
-    schema?: any,
+    schema?: T,
     entries?: Array<Entry<T>>,
     timestamp?: number
 };

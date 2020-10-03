@@ -4,13 +4,13 @@ import {Adapter} from "~types/Adapter";
  *
  * @param data
  */
-const factory = (data: object = {}): Adapter => {
+const factory = (data: Record<string, unknown> = {}): Adapter => {
 
     /**
      *
      * @param data
      */
-    const serialize = (data: object) => {
+    const serialize = (data: Record<string, unknown>) => {
         return JSON.stringify(data, null, 2);
     }
 
@@ -25,7 +25,7 @@ const factory = (data: object = {}): Adapter => {
     /**
      *
      */
-    const read = async (): Promise<object> => {
+    const read = async (): Promise<Record<string, unknown>> => {
         return Promise.resolve(data);
     }
 

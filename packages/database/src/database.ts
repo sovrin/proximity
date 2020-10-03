@@ -1,12 +1,13 @@
 import collectionFactory from './collection';
 import {Config} from "~types/Config";
 import {Collection} from "~types/Collection";
+import {Database} from "~types/Database";
 
 /**
  *
  * @param config
  */
-const factory = async (config: Config) => {
+const factory = async (config: Config): Promise<Database> => {
     config = {
         ext: 'json',
         ...config
@@ -18,9 +19,9 @@ const factory = async (config: Config) => {
      * @param name
      * @param schema
      */
-    const collection = async <T>(name: string, schema = null): Promise<Collection<T>> => {
+    const collection = async <T> (name: string, schema: T): Promise<Collection<T>> => {
         if (!collections[name]) {
-            collections[name] = await collectionFactory<T>(name, schema, config);
+            collections[name] = await collectionFactory(name, schema, config);
         }
 
         return collections[name];

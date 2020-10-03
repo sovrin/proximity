@@ -1,6 +1,5 @@
+import {Collection} from "~types/Collection";
+
 export type Database = {
-    get,
-    set,
-    write,
-    defaults
-}
+    collection<T>(name: string, schema?: T): Promise<Collection<T>>;
+};

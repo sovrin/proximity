@@ -12,13 +12,13 @@ const save = promisify(writeFile);
  * @param root
  * @param data
  */
-const factory = (root: string, data: object): Adapter => {
+const factory = (root: string, data: Record<string, unknown>): Adapter => {
     const {serialize, deserialize} = adapter(data);
 
     /**
      *
      */
-    const read = async (key: string): Promise<object> => {
+    const read = async (key: string): Promise<Record<string, unknown>> => {
         const pointer = resolve(root, key);
 
         if (existsSync(pointer)) {
@@ -39,7 +39,7 @@ const factory = (root: string, data: object): Adapter => {
      * @param key
      * @param data
      */
-    const write = async (key: string, data: object): Promise<void> => {
+    const write = async (key: string, data: Record<string, unknown>): Promise<void> => {
         const pointer = resolve(root, key);
         const string = serialize(data);
 
