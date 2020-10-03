@@ -27,7 +27,7 @@ export const createAdapter = (memory): Adapter => ({
      * @param key
      * @param data
      */
-    write(key?: string, data?: object): Promise<void> {
+    write(key?: string, data?: Record<string, unknown>): Promise<void> {
         memory[key] = data;
         return Promise.resolve(memory[key]);
     },
@@ -35,14 +35,14 @@ export const createAdapter = (memory): Adapter => ({
      *
      * @param key
      */
-    read(key: string): Promise<object> {
+    read(key: string): Promise<Record<string, unknown>>  {
         return Promise.resolve(memory[key]);
     },
     /**
      *
      * @param data
      */
-    serialize(data: object) {
+    serialize(data: Record<string, unknown>) {
         return data;
     },
     /**
