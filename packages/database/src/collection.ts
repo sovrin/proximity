@@ -11,7 +11,7 @@ import {Data, Entry} from "~types/Data";
  * @param schema
  * @param config
  */
-const factory = async <T>(name, schema: T, config: Config): Promise<Collection<T>> => {
+const factory = async <T>(name: string, schema: T, config: Config): Promise<Collection<T>> => {
     const {adapter, ext} = config;
 
     let data: Data<T> = {
@@ -24,7 +24,7 @@ const factory = async <T>(name, schema: T, config: Config): Promise<Collection<T
     /**
      *
      */
-    const read = async () => {
+    const read = async (): Promise<void> => {
         const file = [name, ext].filter(Boolean)
             .join('.')
         ;
@@ -46,7 +46,7 @@ const factory = async <T>(name, schema: T, config: Config): Promise<Collection<T
      *
      * @param entry
      */
-    const filter = (entry) => {
+    const filter = (entry): Entry<T> => {
         const candidate: Entry<T> = {
             _id: '',
             _ts: 0,
@@ -104,7 +104,7 @@ const factory = async <T>(name, schema: T, config: Config): Promise<Collection<T
      *
      * @param id
      */
-    const get = (id: string ): Entry<T> => {
+    const get = (id: string): Entry<T> => {
         const {entries} = data;
 
         return entries.find(({_id}) => (
