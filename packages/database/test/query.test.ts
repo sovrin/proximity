@@ -30,7 +30,7 @@ describe('database', () => {
         it('should find no entries where unknown=bar', () => {
             const instance = query<typeof schema>(data);
             const entries = instance
-                .eq("unknown", "bar")
+                .eq("unknown" as any, "bar")
                 .get()
             ;
 
@@ -66,7 +66,7 @@ describe('database', () => {
 
         it('should find no entries where not unknown=bar', () => {
             const instance = query<typeof schema>(data);
-            const entries = instance.neq("unknown", "bar")
+            const entries = instance.neq("unknown" as any, "bar")
                 .get()
             ;
 
@@ -111,7 +111,7 @@ describe('database', () => {
 
         it('should find no entries where unknown > 2', () => {
             const instance = query<typeof schema>(data);
-            const entries = instance.gt("unknown", 2)
+            const entries = instance.gt("unknown" as any, 2)
                 .get()
             ;
 
@@ -142,7 +142,7 @@ describe('database', () => {
 
         it('should find no entries where unknown >= 2', () => {
             const instance = query<typeof schema>(data);
-            const entries = instance.gte("unknown", 2)
+            const entries = instance.gte("unknown" as any, 2)
                 .get()
             ;
 
@@ -174,7 +174,7 @@ describe('database', () => {
 
         it('should find no entries where unknown < 2', () => {
             const instance = query<typeof schema>(data);
-            const entries = instance.lt("unknown", 2)
+            const entries = instance.lt("unknown" as any, 2)
                 .get()
             ;
 
@@ -204,7 +204,7 @@ describe('database', () => {
 
         it('should find no entries where unknown <= 2', () => {
             const instance = query<typeof schema>(data);
-            const entries = instance.lte("unknown", 2)
+            const entries = instance.lte("unknown" as any, 2)
                 .get()
             ;
 
