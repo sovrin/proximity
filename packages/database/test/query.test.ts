@@ -100,6 +100,15 @@ describe('database', () => {
             assert.strictEqual(second.name === "buzz", true);
         });
 
+        it('should not find gt entries by wrong comparator type', () => {
+            const instance = query<typeof schema>(data);
+            const entries = instance.gt("name", "oof")
+                .get()
+            ;
+
+            assert.strictEqual(entries.length === 0, true);
+        });
+
         it('should find no entries where unknown > 2', () => {
             const instance = query<typeof schema>(data);
             const entries = instance.gt("unknown", 2)
@@ -120,6 +129,15 @@ describe('database', () => {
             assert.strictEqual(entries.length === 2, true);
             assert.strictEqual(first.count === 3, true);
             assert.strictEqual(second.count === 4, true);
+        });
+
+        it('should not find gte entries by wrong comparator type', () => {
+            const instance = query<typeof schema>(data);
+            const entries = instance.gte("name", "foo")
+                .get()
+            ;
+
+            assert.strictEqual(entries.length === 0, true);
         });
 
         it('should find no entries where unknown >= 2', () => {
@@ -145,6 +163,15 @@ describe('database', () => {
             assert.strictEqual(third.count === 4, true);
         });
 
+        it('should not find lt entries by wrong comparator type', () => {
+            const instance = query<typeof schema>(data);
+            const entries = instance.lt("name", "foo")
+                .get()
+            ;
+
+            assert.strictEqual(entries.length === 0, true);
+        });
+
         it('should find no entries where unknown < 2', () => {
             const instance = query<typeof schema>(data);
             const entries = instance.lt("unknown", 2)
@@ -164,6 +191,15 @@ describe('database', () => {
 
             assert.strictEqual(entries.length === 1, true);
             assert.strictEqual(first.count === 1, true);
+        });
+
+        it('should not find lte entries by wrong comparator type', () => {
+            const instance = query<typeof schema>(data);
+            const entries = instance.lte("name", "foo")
+                .get()
+            ;
+
+            assert.strictEqual(entries.length === 0, true);
         });
 
         it('should find no entries where unknown <= 2', () => {
