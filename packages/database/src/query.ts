@@ -6,6 +6,8 @@ import {Query} from "~types/Query";
  * @param entries
  */
 const factory = <T>(entries): Query<T> => {
+    type Key = keyof T;
+
     const state = {
         skip: 0,
         limit: entries.length
@@ -41,7 +43,7 @@ const factory = <T>(entries): Query<T> => {
      * @param key
      * @param value
      */
-    const eq = (key, value): Query<T> => apply((entry) => {
+    const eq = (key: Key, value): Query<T> => apply((entry) => {
         if (hasProperty(entry, key)) {
             if (isRegexp(value)) {
                 return entry[key].match(value) !== null;
@@ -58,7 +60,7 @@ const factory = <T>(entries): Query<T> => {
      * @param key
      * @param value
      */
-    const neq = (key, value): Query<T> => apply((entry) => {
+    const neq = (key: Key, value): Query<T> => apply((entry) => {
         if (hasProperty(entry, key)) {
             if (isRegexp(value)) {
                 return entry[key].match(value) === null;
@@ -75,7 +77,7 @@ const factory = <T>(entries): Query<T> => {
      * @param key
      * @param value
      */
-    const gt = (key, value): Query<T> => apply((entry) => {
+    const gt = (key: Key, value): Query<T> => apply((entry) => {
         if (hasProperty(entry, key)) {
             const cursor = entry[key];
 
@@ -92,7 +94,7 @@ const factory = <T>(entries): Query<T> => {
      * @param key
      * @param value
      */
-    const gte = (key, value): Query<T> => apply((entry) => {
+    const gte = (key: Key, value): Query<T> => apply((entry) => {
         if (hasProperty(entry, key)) {
             const cursor = entry[key];
 
@@ -110,7 +112,7 @@ const factory = <T>(entries): Query<T> => {
      * @param key
      * @param value
      */
-    const lt = (key, value): Query<T> => apply((entry) => {
+    const lt = (key: Key, value): Query<T> => apply((entry) => {
         if (hasProperty(entry, key)) {
             const cursor = entry[key];
 
@@ -128,7 +130,7 @@ const factory = <T>(entries): Query<T> => {
      * @param key
      * @param value
      */
-    const lte = (key, value): Query<T> => apply((entry) => {
+    const lte = (key: Key, value): Query<T> => apply((entry) => {
         if (hasProperty(entry, key)) {
             const cursor = entry[key];
 
