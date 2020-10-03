@@ -56,7 +56,15 @@ describe('database', () => {
             assert.strictEqual(value === undefined, true);
         });
 
-        it('should add and get value from collection while ignoring schema', async () => {
+        it('should add an array and get from collection while ignoring schema', async () => {
+            const instance = await collection('foo', null, {adapter});
+            const id = instance.add(['yeet']);
+            const entry = instance.get(id);
+
+            assert.strictEqual(entry[0], 'yeet');
+        });
+
+        it('should add an object and get from collection while ignoring schema', async () => {
             const instance = await collection('foo', null, {adapter});
             const id = instance.add({foo: "bar"});
             const {foo} = instance.get(id);
@@ -102,16 +110,16 @@ describe('database', () => {
             const instance = await collection('foo', null, {adapter});
             const count = instance.count();
 
-            assert.strictEqual(count, 4);
+            assert.strictEqual(count, 5);
         });
 
         it('should return new count of collections after add', async () => {
             const instance = await collection('foo', null, {adapter});
-            assert.strictEqual(instance.count(), 4);
+            assert.strictEqual(instance.count(), 5);
 
             instance.add({string: "test"});
 
-            assert.strictEqual(instance.count(), 5);
+            assert.strictEqual(instance.count(), 6);
         });
 
         it('should update entry', async () => {

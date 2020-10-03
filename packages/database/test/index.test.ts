@@ -3,6 +3,10 @@ import database from '../index';
 import {createAdapter} from "./utils";
 
 describe('database', () => {
+    const schema = {
+        name: ""
+    }
+
     const memory = {
         "foo.json": {
             name: "foo",
@@ -40,8 +44,16 @@ describe('database', () => {
         const fooEntry = foo.get(fooId);
         const barEntry = bar.get(barId);
 
-        console.info(memory, entry);
-
         assert.strictEqual(foo !== bar, true);
+        assert.strictEqual(fooEntry !== barEntry, true);
+    });
+
+    it('should not create a new collection with the same key', async () => {
+        const instance = await database({adapter});
+
+        const a = await instance.collection('foo', schema);
+        const b = await instance.collection('foo');
+
+        assert.strictEqual(a === b, true);
     });
 });
