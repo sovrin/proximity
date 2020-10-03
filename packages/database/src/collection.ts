@@ -1,9 +1,9 @@
-import creator, {Type} from './creator';
-import {hasProperty, isArray, isEmpty, timestamp, unique} from "~utils";
+import queryFactory from './query';
+import {hasProperty, isEmpty, timestamp, unique} from "~utils";
 import {Config} from "~types/Config";
 import {Collection} from "~types/Collection";
 import {Query} from "~types/Query";
-import {Data} from "~types/Data";
+import {Data, Entry} from "~types/Data";
 
 /**
  *
@@ -11,10 +11,10 @@ import {Data} from "~types/Data";
  * @param schema
  * @param config
  */
-const factory = async (name, schema, config: Config): Promise<Collection> => {
+const factory = async <T>(name, schema: T, config: Config): Promise<Collection<T>> => {
     const {adapter, ext} = config;
 
-    let data: Data = {
+    let data: Data<T> = {
         name,
         schema,
         entries: [],
@@ -35,7 +35,7 @@ const factory = async (name, schema, config: Config): Promise<Collection> => {
     /**
      *
      */
-    const write = () => {
+    const write = (): Promise<Data<T>> => {
         const file = `${name}.${ext}`;
         const promise = adapter.write(file, data);
 
@@ -47,7 +47,7 @@ const factory = async (name, schema, config: Config): Promise<Collection> => {
      * @param entry
      */
     const filter = (entry) => {
-        const candidate = {
+        const candidate: Entry<T> = {
             _id: '',
             _ts: 0,
             ...schema
@@ -69,44 +69,27 @@ const factory = async (name, schema, config: Config): Promise<Collection> => {
      *
      * @param item
      */
-    const add = (item) => {
-
-        /**
-         *
-         * @param entry
-         */
-        const insert = (entry) => {
-            entry._id = unique(32);
-            entry._ts = timestamp();
-
-            if (!isEmpty(schema)) {
-                entry = filter(entry);
-            }
-
-            return entry;
+    const add = (item): string => {
+        let entry = {
+            _id: unique(32),
+            _ts: timestamp(),
+            ...item
         };
 
-        if (!isArray(item)) {
-            const entry = insert(item);
-            data.entries.push(entry);
-            data.timestamp = timestamp();
-
-            return entry._id;
+        if (!isEmpty(schema)) {
+            entry = filter(entry);
         }
 
-        const entries = item.map(insert);
-        data.entries = data.entries.concat(entries);
+        data.entries.push(entry);
         data.timestamp = timestamp();
 
-        return entries.map((entry) => {
-            return entry._id;
-        });
+        return entry._id;
     }
 
     /**
      *
      */
-    const all = () => {
+    const all = (): Array<T> => {
         return [...data.entries];
     }
 
@@ -121,34 +104,30 @@ const factory = async (name, schema, config: Config): Promise<Collection> => {
      *
      * @param id
      */
-    const get = (id: string) => {
+    const get = (id: string ): Entry<T> => {
         const {entries} = data;
-        const candidates = entries.filter((entry) => {
-            return entry._id === id;
-        });
 
-        return candidates.length > 0
-            ? candidates[0]
-            : null
-        ;
-    }
+        return entries.find(({_id}) => (
+            _id === id
+        ));
+    };
 
     /**
      *
      * @param id
      * @param update
      */
-    const update = (id: string, update) => {
+    const update = (id: string, update): boolean | Entry<T> => {
         let changed = false;
 
-        const index = data.entries.findIndex((el) => {
-            return el._id === id;
-        });
+        const index = data.entries.findIndex(({_id}) => (
+            _id === id
+        ));
 
         if (index >= 0) {
-            let obj = data.entries[index];
+            const obj = data.entries[index];
 
-            for (let key of Object.keys(obj)) {
+            for (const key of Object.keys(obj)) {
                 if (key === '_id' || key === '_ts') {
                     continue;
                 }
@@ -182,11 +161,11 @@ const factory = async (name, schema, config: Config): Promise<Collection> => {
      *
      * @param id
      */
-    const remove = (id: string) => {
+    const remove = (id: string): boolean => {
         const {entries} = data;
-        const index = entries.findIndex((entry) => {
-            return entry._id === id;
-        });
+        const index = entries.findIndex(({_id}) => (
+            _id === id
+        ));
 
         if (index >= 0) {
             entries.splice(index, 1);
@@ -202,10 +181,8 @@ const factory = async (name, schema, config: Config): Promise<Collection> => {
     /**
      *
      */
-    const query = (): Query => {
-        const create = creator(Type.QUERY);
-
-        return create(data.entries);
+    const query = (): Query<T> => {
+        return queryFactory<T>(data.entries);
     }
 
     /**
@@ -231,7 +208,7 @@ const factory = async (name, schema, config: Config): Promise<Collection> => {
         remove,
         query,
         reset
-    }
+    };
 }
 
 /**

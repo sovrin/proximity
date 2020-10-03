@@ -1,22 +1,15 @@
-import {Config} from "~types/Config";
 import {Query} from "~types/Query";
+import {Data, Entry} from "~types/Data";
 
-export type CollectionFactory = (name: string, schema: object, config: Config) => Promise<Collection>;
-
-export type Collection = {
-    add(item),
-    read(),
-    write(),
-    add(item),
-    all(),
-    count(),
-    get(id: string),
-    update(id: string, data),
+export type Collection<T> = {
+    add(item): string,
+    read(): Promise<void>,
+    write(): Promise<Data<T>>,
+    all(): Array<T>,
+    count(): number,
+    get(id: string): Entry<T>,
+    update(id: string, data): boolean | T,
     remove(id: string),
-    query(): Query,
+    query(): Query<T>,
     reset(),
 }
-
-export type Collections = {
-    [name in string]: Promise<Collection>
-};

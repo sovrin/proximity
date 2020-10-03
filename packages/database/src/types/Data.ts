@@ -1,12 +1,11 @@
-type Entry = {
+export type Entry<T> = T & {
     _id: string,
     _ts: number,
-    [key: string]: any
 }
 
-export type Data = {
+export type Data<T> = {
     name?: string,
-    schema?: object,
-    entries?: Array<Entry>,
+    schema?: any,
+    entries?: Array<Entry<T>>,
     timestamp?: number
 };

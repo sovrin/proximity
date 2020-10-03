@@ -5,7 +5,7 @@ import {Query} from "~types/Query";
  *
  * @param entries
  */
-const factory = (entries): Query => {
+const factory = <T>(entries): Query<T> => {
     const state = {
         skip: 0,
         limit: entries.length
@@ -24,7 +24,7 @@ const factory = (entries): Query => {
     /**
      *
      */
-    const context = (): Query => ({
+    const context = (): Query<T> => ({
         eq,
         neq,
         gt,
@@ -41,7 +41,7 @@ const factory = (entries): Query => {
      * @param key
      * @param value
      */
-    const eq = (key, value) => apply((entry) => {
+    const eq = (key, value): Query<T> => apply((entry) => {
         if (hasProperty(entry, key)) {
             if (isRegexp(value)) {
                 return entry[key].match(value) !== null;
@@ -58,7 +58,7 @@ const factory = (entries): Query => {
      * @param key
      * @param value
      */
-    const neq = (key, value) => apply((entry) => {
+    const neq = (key, value): Query<T> => apply((entry) => {
         if (hasProperty(entry, key)) {
             if (isRegexp(value)) {
                 return entry[key].match(value) === null;
@@ -75,7 +75,7 @@ const factory = (entries): Query => {
      * @param key
      * @param value
      */
-    const gt = (key, value) => apply((entry) => {
+    const gt = (key, value): Query<T> => apply((entry) => {
         if (hasProperty(entry, key)) {
             const cursor = entry[key];
 
@@ -92,7 +92,7 @@ const factory = (entries): Query => {
      * @param key
      * @param value
      */
-    const gte = (key, value) => apply((entry) => {
+    const gte = (key, value): Query<T> => apply((entry) => {
         if (hasProperty(entry, key)) {
             const cursor = entry[key];
 
@@ -110,7 +110,7 @@ const factory = (entries): Query => {
      * @param key
      * @param value
      */
-    const lt = (key, value) => apply((entry) => {
+    const lt = (key, value): Query<T> => apply((entry) => {
         if (hasProperty(entry, key)) {
             const cursor = entry[key];
 
@@ -128,7 +128,7 @@ const factory = (entries): Query => {
      * @param key
      * @param value
      */
-    const lte = (key, value) => apply((entry) => {
+    const lte = (key, value): Query<T> => apply((entry) => {
         if (hasProperty(entry, key)) {
             const cursor = entry[key];
 
@@ -139,11 +139,12 @@ const factory = (entries): Query => {
 
         return false;
     });
+
     /**
      *
      * @param n
      */
-    const skip = (n: number) => {
+    const skip = (n: number): Query<T> => {
         state.skip = n;
 
         return context();
@@ -153,7 +154,7 @@ const factory = (entries): Query => {
      *
      * @param n
      */
-    const limit = (n: number) => {
+    const limit = (n: number): Query<T> => {
         state.limit = n;
 
         return context();
@@ -162,7 +163,7 @@ const factory = (entries): Query => {
     /**
      *
      */
-    const get = () => {
+    const get = (): Array<T> => {
         const {skip, limit} = state;
         const {length} = entries;
 

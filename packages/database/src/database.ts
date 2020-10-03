@@ -1,6 +1,6 @@
-import creator, {Type} from './creator'
+import collectionFactory from './collection';
 import {Config} from "~types/Config";
-import {Collection, Collections} from "~types/Collection";
+import {Collection} from "~types/Collection";
 
 /**
  *
@@ -11,17 +11,16 @@ const factory = async (config: Config) => {
         ext: 'json',
         ...config
     }
-    const collections: Collections = {};
+    const collections: Record<string, Collection<any>> = {};
 
     /**
      *
      * @param name
      * @param schema
      */
-    const collection = async (name: string, schema = {}): Promise<Collection> => {
+    const collection = async <T>(name: string, schema = null): Promise<Collection<T>> => {
         if (!collections[name]) {
-            const create = creator(Type.COLLECTION);
-            collections[name] = create(name, schema, config)
+            collections[name] = await collectionFactory<T>(name, schema, config);
         }
 
         return collections[name];
@@ -35,6 +34,6 @@ const factory = async (config: Config) => {
 /**
  * User: Oleg Kamlowski <oleg.kamlowski@thomann.de>
  * Date: 25.09.2020
- * Time: 19:36
+ * Time: 18:36
  */
 export default factory;
