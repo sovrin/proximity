@@ -1,39 +1,47 @@
-// import assert from "assert";
+import assert from "assert";
 import database from '../index';
-import {Adapter} from "~types/Adapter";
+import {createAdapter} from "./utils";
 
 describe('database', () => {
     const memory = {
-        "asdasd": 2
-    };
-    const schema = {
-        name: "",
-        count: 0
-    };
-
-    const adapter: Adapter = {
-        write(key?: string, data?: object): Promise<void> {
-            memory[key] = data;
-            return Promise.resolve(memory[key]);
+        "foo.json": {
+            name: "foo",
+            entries: []
         },
-        read(key: string): Promise<object> {
-            return Promise.resolve(memory[key]);
+        "bar.json": {
+            name: "bar",
+            entries: []
         },
-        serialize(data: object) {
-            return data;
-        },
-        deserialize(string: string) {
-            return string;
-        }
     };
 
-    it('should find entry with name=bar', async () => {
+    const adapter = createAdapter(memory);
+
+    it('should create several distinct collections', async () => {
         const instance = await database({adapter});
-        const collection = await instance.collection('yeet', schema);
 
+        const foo = await instance.collection('foo');
+        const bar = await instance.collection('bar');
 
+        assert.strictEqual(foo !== bar, true);
+    });
 
-        collection.query().get().
+    it('should create distinct entries', async () => {
+        const instance = await database({adapter});
+        const entry = {
+            name: "entry"
+        }
 
+        const foo = await instance.collection('foo');
+        const fooId = foo.add(entry);
+
+        const bar = await instance.collection('bar');
+        const barId = bar.add(entry);
+
+        const fooEntry = foo.get(fooId);
+        const barEntry = bar.get(barId);
+
+        console.info(memory, entry);
+
+        assert.strictEqual(foo !== bar, true);
     });
 });

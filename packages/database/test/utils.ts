@@ -1,3 +1,5 @@
+import {Adapter} from "~types/Adapter";
+
 /**
  *
  * @param a
@@ -14,3 +16,40 @@ export const equals = (a, b) => {
 
     return JSON.stringify(a) === JSON.stringify(b);
 }
+
+/**
+ *
+ * @param memory
+ */
+export const createAdapter = (memory): Adapter => ({
+    /**
+     *
+     * @param key
+     * @param data
+     */
+    write(key?: string, data?: object): Promise<void> {
+        memory[key] = data;
+        return Promise.resolve(memory[key]);
+    },
+    /***
+     *
+     * @param key
+     */
+    read(key: string): Promise<object> {
+        return Promise.resolve(memory[key]);
+    },
+    /**
+     *
+     * @param data
+     */
+    serialize(data: object) {
+        return data;
+    },
+    /**
+     *
+     * @param string
+     */
+    deserialize(string: string) {
+        return string;
+    }
+})

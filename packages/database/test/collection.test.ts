@@ -1,7 +1,6 @@
 import assert from "assert";
 import collection from '../src/collection'
-import {Adapter} from "~types/Adapter";
-import {equals} from "./utils";
+import {equals, createAdapter} from "./utils";
 
 describe('database', () => {
     describe('collection', () => {
@@ -16,7 +15,7 @@ describe('database', () => {
             "string": "",
             "number": 0,
             "boolean": true,
-            "default": "secret"
+            "default": "secret",
         };
 
         const memory = {
@@ -29,21 +28,7 @@ describe('database', () => {
             }
         };
 
-        const adapter: Adapter = {
-            write(key?: string, data?: object): Promise<void> {
-                memory[key] = data;
-                return Promise.resolve(memory[key]);
-            },
-            read(key: string): Promise<object> {
-                return Promise.resolve(memory[key]);
-            },
-            serialize(data: object) {
-                return data;
-            },
-            deserialize(string: string) {
-                return string;
-            }
-        }
+        const adapter = createAdapter(memory);
 
         it('should create an instance of collection and has functions', async () => {
             const instance = await collection('foo', null, {adapter});
@@ -58,7 +43,7 @@ describe('database', () => {
 
         it('should read collection and get value', async () => {
             const instance = await collection('foo', null, {adapter});
-            instance.read();
+            await instance.read();
             const value = instance.get("661C47F2F199CBFA71FE03C2747CF549");
 
             assert.strictEqual(value, entry);
@@ -68,15 +53,26 @@ describe('database', () => {
             const instance = await collection('foo', null, {adapter});
             const value = instance.get("foo");
 
-            assert.strictEqual(value === null, true);
+            assert.strictEqual(value === undefined, true);
         });
 
         it('should add and get value from collection while ignoring schema', async () => {
             const instance = await collection('foo', null, {adapter});
             const id = instance.add({foo: "bar"});
-            const {foo} = instance.get(id) as any;
+            const {foo} = instance.get(id);
 
             assert.strictEqual(foo, "bar");
+        });
+
+        it('should not mutate input data', async () => {
+            const instance = await collection('foo', null, {adapter});
+            const entry = {foo: "bar"} as any;
+            const id = instance.add(entry);
+            const value = instance.get(id);
+
+            assert.strictEqual(entry !== value, true);
+            assert.strictEqual(entry._id === undefined, true);
+            assert.strictEqual(entry._ts === undefined, true);
         });
 
         it('should add and get value from collection while adhering schema', async () => {
@@ -106,35 +102,16 @@ describe('database', () => {
             const instance = await collection('foo', null, {adapter});
             const count = instance.count();
 
-            assert.strictEqual(count, 3);
+            assert.strictEqual(count, 4);
         });
 
         it('should return new count of collections after add', async () => {
             const instance = await collection('foo', null, {adapter});
-            assert.strictEqual(instance.count(), 3);
+            assert.strictEqual(instance.count(), 4);
 
             instance.add({string: "test"});
 
-            assert.strictEqual(instance.count(), 4);
-        });
-
-        it('should add several entries at once into collection', async () => {
-            const instance = await collection('foo', null, {adapter});
-
-            const [first, second] = instance.add([
-                {
-                    string: "one",
-                },
-                {
-                    string: "two",
-                }
-            ]);
-
-            const one = instance.get(first) as any;
-            const two = instance.get(second) as any;
-
-            assert.strictEqual(one.string === "one", true);
-            assert.strictEqual(two.string === "two", true);
+            assert.strictEqual(instance.count(), 5);
         });
 
         it('should update entry', async () => {
@@ -150,7 +127,7 @@ describe('database', () => {
             assert.strictEqual(changed.foo === undefined, true);
         });
 
-        it('should not update entry by correct id', async () => {
+        it('should not update entry by correct id but unknown field', async () => {
             const instance = await collection('foo', null, {adapter});
 
             const changed = instance.update("661C47F2F199CBFA71FE03C2747CF549", {
@@ -216,22 +193,6 @@ describe('database', () => {
         it('should return query builder', async () => {
             const instance = await collection('foo', null, {adapter});
             const builder = instance.query();
-
-            assert.strictEqual(builder !== undefined, true);
-        });
-
-        it('should return query builder', async () => {
-            const schema = {
-                foo: "",
-            };
-
-            type Schema = typeof schema;
-
-            const instance = await collection<Schema>('foo', schema, {adapter});
-
-            const builder = instance.query();
-            const val = builder.get();
-            val.
 
             assert.strictEqual(builder !== undefined, true);
         });
