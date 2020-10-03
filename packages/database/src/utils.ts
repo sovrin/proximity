@@ -27,34 +27,24 @@ export const isRegexp = (value): boolean => (
  *
  * @param object
  */
-export const isEmpty = (object): boolean => {
-    for (const key in object) {
-        if (hasProperty(object, key)) {
-            return false;
-        }
-    }
-
-    return true;
-}
+export const isEmpty = (object): boolean => (
+    !object || (object.constructor === Object && Object.keys(object).length === 0)
+)
 
 /**
  *
- * @param array
  */
-export const isArray = (array): boolean => Array.isArray(array);
+export const unique = (): string => {
+    const charset = 'ABCDEF0123456789';
 
-/**
- *
- * @param n
- * @param charset
- */
-export const unique = (n = 32, charset = 'ABCDEF012345679'): string => (
-    [...Array(n)]
-        .map(Math.random)
-        .map((n) => ~~(n* 100))
-        .map((n) => charset[n % charset.length])
-        .join('')
-);
+    return (
+        [...Array(32)]
+            .map(Math.random)
+            .map((n) => ~~(n * 100))
+            .map((n) => charset[n % charset.length])
+            .join('')
+    );
+};
 
 /**
  *

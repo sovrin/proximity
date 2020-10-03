@@ -69,9 +69,9 @@ const factory = async <T>(name, schema: T, config: Config): Promise<Collection<T
      *
      * @param item
      */
-    const add = (item): string => {
-        let entry = {
-            _id: unique(32),
+    const add = (item: T): string => {
+        let entry: Entry<T> = {
+            _id: unique(),
             _ts: timestamp(),
             ...item
         };
