@@ -1,5 +1,5 @@
 import poolFactory from './pool';
-import {IContext} from "@sovrin/proximity-server/src";
+import {Context} from '@sovrin/proximity-server';
 
 /**
  * User: Oleg Kamlowski <oleg.kamlowski@thomann.de>
@@ -14,7 +14,7 @@ export default async ({open, close, register}) => {
      * @param socket
      * @param session
      */
-    const onOpen = ({session}: IContext) => {
+    const onOpen = ({session}: Context) => {
         session.set('pool', pool)
     }
 
@@ -23,7 +23,7 @@ export default async ({open, close, register}) => {
      * @param socket
      * @param session
      */
-    const onClose = ({socket, session}: IContext) => {
+    const onClose = ({socket, session}: Context) => {
         pool.unregister(socket);
 
         session.unset('pool')

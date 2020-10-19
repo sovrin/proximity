@@ -5,4 +5,6 @@ import appFactory from "./app";
  * Date: 30.10.2019
  * Time: 21:48
  */
-appFactory();
+(async () => {
+    await appFactory();
+})()
