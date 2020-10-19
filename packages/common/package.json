@@ -4,7 +4,6 @@
   "description": "shared components for proximity",
   "main": "src/index.ts",
   "scripts": {
-    "build": "tsc",
     "dev": "ts-node src/index.ts"
   },
   "repository": {
