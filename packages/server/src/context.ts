@@ -1,6 +1,8 @@
-import {IContext, IFactory, ISession} from "./types";
 import {get, set} from "./utils";
-import {IPayload} from "@sovrin/proximity-common/src/payload";
+import {Payload} from "@sovrin/proximity-common";
+import {Factory} from "./types/Factory";
+import {Context} from "./types/Context";
+import {Session} from "./types/Session";
 
 export const Type = {
     OPEN: 'open',
@@ -25,7 +27,7 @@ const Prop = {
  * @param req
  * @param session
  */
-const factory = (ws, req, session: ISession): IFactory => {
+const factory = (ws, req, session: Session): Factory => {
     const state = {
         [Prop.SOCKET]: ws,
         [Prop.REQUEST]: req,
@@ -39,7 +41,7 @@ const factory = (ws, req, session: ISession): IFactory => {
     /**
      *
      */
-    const self = (): IContext => ({
+    const context = (): Context => ({
         send,
         done,
         throw: error,
@@ -57,7 +59,7 @@ const factory = (ws, req, session: ISession): IFactory => {
      *
      * @param message
      */
-    const open = (message: string): IContext => {
+    const open = (message: string): Context => {
         set(state)
             (Prop.TYPE, Type.MESSAGE)
             (Prop.DONE, false)
@@ -65,7 +67,7 @@ const factory = (ws, req, session: ISession): IFactory => {
         ;
 
         try {
-            const {path, data}: IPayload = JSON.parse(message);
+            const {path, data}: Payload = JSON.parse(message);
 
             set(state)
                 (Prop.PATH, path)
@@ -75,13 +77,13 @@ const factory = (ws, req, session: ISession): IFactory => {
             console.error(e);
         }
 
-        return self();
+        return context();
     };
 
     /**
      *
      */
-    const close = (): IContext => {
+    const close = (): Context => {
         set(state)
             (Prop.MESSAGE, null)
             (Prop.DATA, null)
@@ -89,28 +91,28 @@ const factory = (ws, req, session: ISession): IFactory => {
             (Prop.TYPE, Type.CLOSE)
         ;
 
-        return self();
+        return context();
     };
 
     /**
      *
      * @param args
      */
-    const send = (...args: any): IContext => {
+    const send = (...args: any): Context => {
         state[Prop.SOCKET].send(...args);
 
-        return self();
+        return context();
     };
 
     /**
      *
      */
-    const done = (): IContext => {
+    const done = (): Context => {
         set(state)
             (Prop.DONE, true)
         ;
 
-        return self();
+        return context();
     };
 
     /**
@@ -122,7 +124,7 @@ const factory = (ws, req, session: ISession): IFactory => {
     };
 
     return {
-        context: self(),
+        context: context(),
         close,
         open,
     };

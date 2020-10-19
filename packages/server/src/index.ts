@@ -1,5 +1,8 @@
 import server from './server';
-import {IContext, IFactory, IServer, ISession} from './types';
+import {Context} from './types/Context';
+import {Factory} from './types/Factory';
+import {Session} from './types/Session';
+import {Server} from './types/Server';
 
 /**
  * User: Oleg Kamlowski <oleg.kamlowski@thomann.de>
@@ -8,8 +11,8 @@ import {IContext, IFactory, IServer, ISession} from './types';
  */
 export default server;
 export {
-    ISession,
-    IContext,
-    IFactory,
-    IServer,
+    Session,
+    Context,
+    Factory,
+    Server,
 }
