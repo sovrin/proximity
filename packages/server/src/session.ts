@@ -1,10 +1,10 @@
 import {AsyncLocalStorage} from 'async_hooks';
-import {ISession} from "./types";
+import {Session} from "./types/Session";
 
 /**
  *
  */
-const factory = () :ISession => {
+const factory = () :Session => {
     const als = new AsyncLocalStorage();
     const store = new Map();
 

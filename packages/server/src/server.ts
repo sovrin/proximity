@@ -1,9 +1,9 @@
-import {Server} from "ws";
+import {Server as Instance} from "ws";
 import {uuid} from "./utils";
-import {IServer} from "./types";
 import contextFactory from './context';
 import routerFactory from './router';
 import sessionFactory from './session';
+import {Server} from "./types/Server";
 
 const Prop = {
     ROUTER: 'router',
@@ -16,7 +16,7 @@ const Prop = {
  *
  * @param config
  */
-const factory = (config): IServer => {
+const factory = (config): Server => {
     const {on, open, close, route, register} = routerFactory();
 
     const state = {
@@ -41,7 +41,7 @@ const factory = (config): IServer => {
      */
     const listen = (): void => {
         const [, setServer] = update(Prop.SERVER);
-        const instance = new Server(config);
+        const instance = new Instance(config);
 
         /**
          *

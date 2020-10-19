@@ -1,6 +1,5 @@
-
-const {promisify} = require('util');
-const {readdir, stat} = require('fs');
+import {promisify} from "util";
+import {readdir, stat} from "fs";
 
 /**
  *

@@ -1,15 +1,16 @@
 import debug from 'debug';
 import {extname, resolve} from "path";
-import {IContext, IRouter} from "./types";
 import {Type} from "./context";
 import {load, read, stats} from "./utils";
+import {Router} from "./types/Router";
+import {Context} from "./types/Context";
 
 const log = debug('proximity:router');
 
 /**
  *
  */
-const factory = (): IRouter => {
+const factory = (): Router => {
     const stack = {};
 
     /**
@@ -81,7 +82,7 @@ const factory = (): IRouter => {
      *
      * @param context
      */
-    const route = async (context: IContext) => {
+    const route = async (context: Context) => {
         const {type, path} = context;
         const handle = get(type, path);
 
