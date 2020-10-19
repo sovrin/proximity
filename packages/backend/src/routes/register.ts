@@ -1,12 +1,12 @@
-import {IContext} from "@sovrin/proximity-server";
-import {payload as payloadFactory} from "../../../common/src";
+import {Context} from '@sovrin/proximity-server';
+import {payload as payloadFactory} from '@sovrin/proximity-common';
 
 /**
  * User: Oleg Kamlowski <oleg.kamlowski@thomann.de>
  * Date: 13.04.2020
  * Time: 16:24
  */
-export default ({session, data, socket}: IContext) => {
+export default ({session, data, socket}: Context) => {
     const {project} = data;
     const pool = session.get('pool');
 
