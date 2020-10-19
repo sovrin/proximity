@@ -7,4 +7,4 @@ const factory = () => {
  * Date: 13.04.2020
  * Time: 16:25
  */
-export default factory;
+export const action = factory;

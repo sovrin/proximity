@@ -1,8 +1,3 @@
-export interface IPayload {
-    path: string,
-    data: object
-}
-
 /**
  *
  * @param path
@@ -20,4 +15,4 @@ const factory = (path: string, data?: object) => (
  * Date: 13.04.2020
  * Time: 16:31
  */
-export default factory;
+export const payload = factory;

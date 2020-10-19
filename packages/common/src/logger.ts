@@ -93,4 +93,4 @@ const factory = (options: IOptions) => {
  * Date: 13.04.2020
  * Time: 16:47
  */
-export default factory;
+export const logger = factory;
