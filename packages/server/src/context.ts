@@ -1,8 +1,6 @@
-import {get, set} from "./utils";
-import {Payload} from "@sovrin/proximity-common";
-import {Factory} from "./types/Factory";
-import {Context} from "./types/Context";
-import {Session} from "./types/Session";
+import {Payload} from '@sovrin/proximity-common';
+import {get, set} from './utils';
+import {Session, Context, Factory} from './types';
 
 export const Type = {
     OPEN: 'open',

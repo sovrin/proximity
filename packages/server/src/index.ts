@@ -1,8 +1,5 @@
 import server from './server';
-import {Context} from './types/Context';
-import {Factory} from './types/Factory';
-import {Session} from './types/Session';
-import {Server} from './types/Server';
+import {Context, Session, Factory, Server} from './types';
 
 /**
  * User: Oleg Kamlowski <oleg.kamlowski@thomann.de>
@@ -15,4 +12,4 @@ export {
     Context,
     Factory,
     Server,
-}
+};

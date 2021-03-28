@@ -1,7 +1,7 @@
 import server from '../src/server';
-import {IContext} from "../src";
+import {Context} from "../src";
 const webSocket = require('ws');
-import * as assert from 'assert';
+import assert from 'assert';
 
 describe('router', () => {
     let app;
@@ -26,14 +26,14 @@ describe('router', () => {
 
         const string = JSON.stringify(payload);
 
-        app.on('helloWorld', ({data, send}: IContext) => {
+        app.on('helloWorld', ({data, send}: Context) => {
             send(data);
         });
 
         client.send(string);
 
         client.onmessage = ({data}) => {
-            assert.equal(data, payload.data);
+            assert(data === payload.data);
 
             done();
         }
@@ -47,14 +47,14 @@ describe('router', () => {
 
         const string = JSON.stringify(payload);
 
-        app.on('helloWorld', ({data, send}: IContext) => {
+        app.on('helloWorld', ({data, send}: Context) => {
             send(data);
         });
 
         client.send(string);
 
         client.onmessage = ({data}) => {
-            assert.equal(data, payload.data);
+            assert(data === payload.data);
 
             done();
         }

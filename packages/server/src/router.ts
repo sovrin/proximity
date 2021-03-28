@@ -2,8 +2,7 @@ import debug from 'debug';
 import {extname, resolve} from "path";
 import {Type} from "./context";
 import {load, read, stats} from "./utils";
-import {Router} from "./types/Router";
-import {Context} from "./types/Context";
+import {Router, Context} from './types';
 
 const log = debug('proximity:router');
 

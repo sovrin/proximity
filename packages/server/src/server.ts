@@ -3,7 +3,7 @@ import {uuid} from "./utils";
 import contextFactory from './context';
 import routerFactory from './router';
 import sessionFactory from './session';
-import {Server} from "./types/Server";
+import {Server} from './types';
 
 const Prop = {
     ROUTER: 'router',
