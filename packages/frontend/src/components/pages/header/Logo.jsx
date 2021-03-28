@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from '@thomann/spectre-react-components/Button';
-import Root, {Icon, Box, Name} from 'styles/pages/header/Logo.style';
+import Root, {Icon, Item, Box, Name} from 'styles/pages/header/Logo.style';
 import useSettings, {Settings} from 'hooks/useSettings';
 
 /**
@@ -20,20 +20,22 @@ const Logo = () => {
 
     return (
         <Root>
-            <Box
-                onClick={onToggle}
-                size={Button.Size.SMALL}
-                primary
-            >
-                <Icon
-                    type={Icon.Type.CIRCULAR_GRAPH}
-                    size={Icon.Size.SMALL}
-                />
-            </Box>
+            <Item>
+                <Box
+                    onClick={onToggle}
+                    size={Button.Size.SMALL}
+                    primary
+                >
+                    <Icon
+                        type={Icon.Type.CIRCULAR_GRAPH}
+                        size={Icon.Size.SMALL}
+                    />
+                </Box>
 
-            {(!collapsed) && (
-                <Name>Proximity</Name>
-            )}
+                {(!collapsed) && (
+                    <Name>Proximity</Name>
+                )}
+            </Item>
         </Root>
     );
 };

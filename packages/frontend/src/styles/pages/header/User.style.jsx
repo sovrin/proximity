@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Menu, {Item as BaseItem, Divider as BaseDivider} from '@thomann/spectre-react-components/Menu';
+import BaseAvatar from '@thomann/spectre-react-components/Avatar';
 import BaseLink from 'components/atoms/Link';
 import BaseIcon from 'components/atoms/Icon';
 
@@ -7,14 +8,13 @@ import BaseIcon from 'components/atoms/Icon';
  *
  */
 const Root = styled(Menu)`
-    //grid-area: navigation;
     display: flex;
     flex-direction: column;;
     align-items: center;
-    padding: var(--spacing);
+    padding: 0;
+    min-width: 0;
     color: var(--accent);
     transform: none;
-    min-width: 0;
 `;
 
 export const Item = styled(BaseItem)`
@@ -32,6 +32,10 @@ export const Icon = styled(BaseIcon)`
     display: flex;
     //margin-right: var(--spacing);
     align-self: center;
+`;
+
+export const Avatar = styled(BaseAvatar)`
+    //margin-right: var(--spacing);
 `;
 
 export const Divider = styled(BaseDivider)``;

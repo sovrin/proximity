@@ -6,6 +6,7 @@ import Router from 'contexts/Router';
 import Logo from './header/Logo';
 import Version from './header/Version';
 import Navigation from './header/Navigation';
+import User from './header/User';
 import routes from './Dashboard/routes';
 
 /**
@@ -17,6 +18,7 @@ const Dashboard = () => (
     <Page>
         <Sidebar>
             <Logo/>
+            <User/>
             <Navigation/>
             <Version/>
         </Sidebar>

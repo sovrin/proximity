@@ -5,13 +5,8 @@ import {Breakpoint} from 'hooks/useTheme';
  *
  */
 const Root = styled('div')`
-    display: grid;
-    grid-template-areas:
-        "logo"
-        "navigation"
-        "version";
-    grid-template-rows: min-content;
-    grid-template-columns: min-content auto;
+    display: flex;
+    flex-direction: column;
     padding: var(--spacing);
     grid-area: sidebar;
     min-width: auto;

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Menu from '@thomann/spectre-react-components/Menu';
+import Menu, {Item as BaseItem} from '@thomann/spectre-react-components/Menu';
 import ButtonBase from '@thomann/spectre-react-components/Button';
 import IconBase from 'components/atoms/Icon';
 
@@ -24,7 +24,10 @@ export const Icon = styled(IconBase)`
  *
  */
 export const Box = styled(ButtonBase)`
-    
+`;
+
+export const Item = styled(BaseItem)`
+    padding: 0 !important;
 `;
 
 /**
@@ -32,12 +35,11 @@ export const Box = styled(ButtonBase)`
  */
 const Root = styled(Menu)`
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-content: center;
     min-width: auto;
     transform: none;
     padding: var(--spacing-sm);
-    grid-area: logo;
 `;
 
 /**

@@ -9,7 +9,6 @@ const Root = styled('div')`
     grid-template-rows: auto;
     grid-template-columns: min-content auto;
     grid-template-areas: "sidebar content";
-    grid-gap: var(--spacing);
     max-height: 100vh;
     height: 100vh;
     overflow-y: auto;

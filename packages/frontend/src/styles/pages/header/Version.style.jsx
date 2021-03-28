@@ -4,8 +4,8 @@ import styled from 'styled-components';
  *
  */
 const Root = styled('span')`
+    margin-top: auto;
     color: var(--white);
-    grid-area: version;
     font-size: small;
     font-style: italic;
     text-align: center;

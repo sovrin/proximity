@@ -1,6 +1,5 @@
 import React from 'react';
-import Container from '@thomann/spectre-react-components/Container';
-import Root from 'styles/templates/Content.style';
+import Root, {Container} from 'styles/templates/Content.style';
 
 /**
  *
@@ -9,7 +8,7 @@ import Root from 'styles/templates/Content.style';
  */
 const Content = ({children}) => (
     <Root>
-        <Container size={Container.Size.LARGE}>
+        <Container>
             {children}
         </Container>
     </Root>
