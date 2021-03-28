@@ -1,6 +1,6 @@
 import {payload as payloadFactory} from '@sovrin/proximity-common';
-import {IAdapter} from "./Adapter/IAdapter";
 import Socket from "./Adapter/Socket";
+import {Adapter} from './types';
 
 /**
  *
@@ -172,7 +172,7 @@ const Proximity = () => {
     /**
      *
      */
-    const create = (): IAdapter => {
+    const create = (): Adapter => {
         let {
             [CONFIG_HOST]: host,
             [CONFIG_PORT]: port,
@@ -232,4 +232,4 @@ const Proximity = () => {
  * Date: 09.04.2020
  * Time: 20:55
  */
-export default Proximity();
+export = Proximity();

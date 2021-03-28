@@ -26,13 +26,13 @@
   "homepage": "https://github.com/sovrin/proximity-adapter#readme",
   "devDependencies": {
     "@sovrin/proximity-common": "*",
-    "@types/mocha": "^8.0.3",
-    "@types/node": "^14.11.10",
+    "@types/mocha": "^8.2.2",
+    "@types/node": "^14.14.37",
     "@types/ws": "*",
-    "debug": "^4.2.0",
+    "debug": "^4.3.1",
     "mocha": "latest",
-    "ts-node": "^9.0.0",
-    "typescript": "^4.0.3",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.3",
     "ws": "latest"
   }
 }

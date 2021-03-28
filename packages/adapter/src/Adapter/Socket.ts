@@ -1,12 +1,12 @@
-import {IAdapter} from "./IAdapter";
 import WebSocket from "ws";
+import {Adapter} from '../types';
 
 /**
  * User: Oleg Kamlowski <oleg.kamlowski@thomann.de>
  * Date: 08.05.2020
  * Time: 23:00
  */
-export default class Socket implements IAdapter {
+export = class Socket implements Adapter {
 
     /**
      *
