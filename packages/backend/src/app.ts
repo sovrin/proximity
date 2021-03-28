@@ -1,5 +1,6 @@
 import serverFactory, {Server} from '@sovrin/proximity-server';
 import routes from './routes';
+import database from './database';
 
 const PORT = process.env.PORT || 3315;
 
@@ -10,6 +11,8 @@ const factory = async () => {
     const {listen, open, close, register}: Server = serverFactory({port: PORT});
 
     await routes({open, close, register});
+    await database('collections');
+    
     console.info('listening on :' + PORT);
 
     listen();
