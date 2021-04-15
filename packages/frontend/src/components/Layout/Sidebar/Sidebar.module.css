@@ -1,0 +1,26 @@
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    padding: var(--spacing-sm);
+    grid-area: sidebar;
+    min-width: auto;
+    max-height: 100vh;
+    transform: none;
+    color: var(--white);
+    background: var(--accent);
+    z-index: 10;
+}
+
+@value medium: max-width: 960px;
+
+@media (medium) {
+    .sidebar {
+        grid-area: content;
+        position: relative;
+        left: 0;
+    }
+
+    .collapsed {
+        left: -100%;
+    }
+}

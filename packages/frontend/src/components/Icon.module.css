@@ -1,0 +1,30 @@
+.icon {
+    display: flex;
+    width: var(--unit-6);
+    height: var(--unit-6);
+}
+
+.icon.huge {
+    width: var(--unit-10);
+    height: var(--unit-10);
+}
+
+.icon.big {
+    width: var(--unit-8);
+    height: var(--unit-8);
+}
+
+.icon.small {
+    width: var(--unit-4);
+    height: var(--unit-4);
+}
+
+.icon.tiny {
+    width: var(--unit-2);
+    height: var(--unit-2);
+}
+
+.vector {
+    width: 100%;
+    height: 100%;
+}

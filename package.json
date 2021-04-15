@@ -11,9 +11,18 @@
     "adapter:dev": "lerna run --stream --no-prefix --scope @sovrin/proximity-adapter dev",
     "adapter:test": "lerna run --stream --no-prefix --scope @sovrin/proximity-adapter test",
     "bootstrap": "lerna bootstrap --hoist",
-    "clean": "lerna clean --yes"
+    "clean": "lerna clean --yes",
+    "update": "npx lernaupdate"
   },
   "devDependencies": {
-    "lerna": "^3.22.1"
+    "@typescript-eslint/eslint-plugin": "^4.19.0",
+    "@typescript-eslint/parser": "^4.19.0",
+    "eslint": "^7.23.0",
+    "lerna": "^4.0.0",
+    "lerna-update-wizard": "^0.17.8",
+    "mocha": "^8.3.2",
+    "next-transpile-modules": "^6.3.0",
+    "nyc": "^15.1.0",
+    "typescript": "^4.2.3"
   }
 }

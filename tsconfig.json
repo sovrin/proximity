@@ -7,13 +7,23 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "sourceMap": true,
-    "outDir": "dist",
+    "paths": {
+      "@sovrin/proximity-adapter": ["./packages/adapter/src"],
+      "@sovrin/proximity-adapter/*": ["./packages/adapter/src/*"],
+      "@sovrin/proximity-backend": ["./packages/backend/src"],
+      "@sovrin/proximity-backend/*": ["./packages/backend/src/*"],
+      "@sovrin/proximity-common": ["./packages/common/src"],
+      "@sovrin/proximity-common/*": ["./packages/common/src/*"],
+      "@sovrin/proximity-frontend": ["./packages/frontend"],
+      "@sovrin/proximity-frontend/*": ["./packages/frontend/*"],
+      "@sovrin/proximity-server": ["./packages/server"],
+      "@sovrin/proximity-server/*": ["./packages/server/*"]
+    },
     "lib": [
       "esnext"
     ]
   },
   "exclude": [
-    "node_modules",
-    "dist"
+    "**/dist/"
   ]
 }

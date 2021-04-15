@@ -1,0 +1,31 @@
+.logo {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    min-width: auto;
+    transform: none;
+    padding: var(--spacing-tn);
+    margin-bottom: var(--spacing-lg);
+}
+
+.name {
+    color: var(--accent);
+    margin: auto var(--spacing-lg);
+    letter-spacing: 0.05rem;
+    font-style: italic;
+    font-size: small;
+    font-family: "Lucida Console", monospace !important;
+}
+
+.button {
+    /*margin: var(--spacing-sm);*/
+}
+
+.icon {
+    fill: #fff;
+}
+
+.item {
+    display: flex;
+    padding: 0 !important;
+}
