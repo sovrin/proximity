@@ -1,40 +1,22 @@
 {
-  "name": "@sovrin/proximity-frontend",
-  "version": "1.0.0",
-  "description": "frontend component for proximity",
+  "name": "frontend",
+  "version": "0.1.0",
   "main": "lib/index.js",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sovrin/proximity.git"
-  },
-  "author": {
-    "name": "Oleg Kamlowski",
-    "email": "oleg.kamlowski@thomann.de"
-  },
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/sovrin/proximity/issues"
-  },
-  "homepage": "https://github.com/sovrin/proximity#readme",
   "devDependencies": {
-    "@types/node": "^14.14.37",
-    "@types/react": "^17.0.3",
-    "prop-types": "^15.7.2",
-    "typescript": "^4.2.3",
-    "@sovrin/proximity-common": "*",
-    "@thomann/classnames": "1.2.1",
-    "@thomann/spectre-react-components": "^0.2.1",
-    "@types/react-dom": "^17.0.3",
-    "debug": "^4.3.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "@types/react": "^18.0.26",
+    "prop-types": "^15.8.1",
+    "common": "*",
+    "@thomann/classnames": "^1.3.1",
+    "@types/react-dom": "^18.0.9 ",
+    "react": "^18.2.0 ",
+    "react-dom": "^18.2.0",
     "spectre.css": "^0.5.9",
-    "next": "^10.1.1",
-    "wouter": "^2.7.4"
+    "next": "^13.0.6 ",
+    "wouter": "^2.9.0"
   }
 }

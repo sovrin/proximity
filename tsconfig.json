@@ -1,29 +1,28 @@
 {
   "compilerOptions": {
-    "baseUrl": "./packages",
+    "incremental": true,
+    "module": "CommonJS",
+    "resolveJsonModule": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "target": "es5",
-    "module": "commonjs",
-    "moduleResolution": "node",
+    "target": "esnext",
+    "moduleResolution": "Node",
     "sourceMap": true,
+    "rootDir": "./",
+    "outDir": "./dist",
     "paths": {
-      "@sovrin/proximity-adapter": ["./packages/adapter/src"],
-      "@sovrin/proximity-adapter/*": ["./packages/adapter/src/*"],
-      "@sovrin/proximity-backend": ["./packages/backend/src"],
-      "@sovrin/proximity-backend/*": ["./packages/backend/src/*"],
-      "@sovrin/proximity-common": ["./packages/common/src"],
-      "@sovrin/proximity-common/*": ["./packages/common/src/*"],
-      "@sovrin/proximity-frontend": ["./packages/frontend"],
-      "@sovrin/proximity-frontend/*": ["./packages/frontend/*"],
-      "@sovrin/proximity-server": ["./packages/server"],
-      "@sovrin/proximity-server/*": ["./packages/server/*"]
+      "#/*": [
+        "./packages/*"
+      ]
     },
-    "lib": [
-      "esnext"
-    ]
+    "declaration": true
   },
   "exclude": [
-    "**/dist/"
+    "index.js",
+    "./**/tests/*",
+    "./dist"
+  ],
+  "lib": [
+    "ESNext"
   ]
 }

@@ -1,6 +1,6 @@
 import React from 'react';
-import Container from '@thomann/spectre-react-components/Container';
-import {Content as Base} from '@thomann/spectre-react-components/OffCanvas';
+// import Container from '@thomann/spectre-react-components/Container';
+// import {Content as Base} from '@thomann/spectre-react-components/OffCanvas';
 import Layout from '../Layout';
 import style from './Content.module.css';
 
@@ -11,11 +11,12 @@ import style from './Content.module.css';
  */
 const Content = ({children = null}) => (
     <Layout type="content">
-        <Base className={style.content}>
-            <Container size={Container.Size.MEDIUM}>
-                {children}
-            </Container>
-        </Base>
+        {children}
+        {/*<Base className={style.content}>*/}
+        {/*    <Container size={Container.Size.MEDIUM}>*/}
+        {/*        {children}*/}
+        {/*    </Container>*/}
+        {/*</Base>*/}
     </Layout>
 );
 

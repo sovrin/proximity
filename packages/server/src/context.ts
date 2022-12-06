@@ -1,4 +1,4 @@
-import {Payload} from '@sovrin/proximity-common';
+import {Payload} from 'common';
 import {get, set} from './utils';
 import {Session, Context, Factory} from './types';
 

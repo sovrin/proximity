@@ -1,5 +1,5 @@
 import React from 'react';
-import {Container} from '@thomann/spectre-react-components';
+// import {Container} from '@thomann/spectre-react-components';
 import style from './Header.module.css';
 import Layout from '../Layout';
 
@@ -11,9 +11,10 @@ import Layout from '../Layout';
 const Header = ({children}) => (
     <Layout type="header">
         <div className={style.header}>
-            <Container size={Container.Size.LARGE}>
-                {children}
-            </Container>
+            {children}
+            {/*<Container size={Container.Size.LARGE}>*/}
+            {/*    {children}*/}
+            {/*</Container>*/}
         </div>
     </Layout>
 );

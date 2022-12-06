@@ -1,5 +1,5 @@
-import {Context} from '@sovrin/proximity-server';
-import {payload as payloadFactory} from '@sovrin/proximity-common';
+import {Context} from 'server';
+import {payload as payloadFactory} from 'common';
 
 /**
  * User: Oleg Kamlowski <oleg.kamlowski@thomann.de>

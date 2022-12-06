@@ -1,5 +1,5 @@
 import poolFactory from './pool';
-import {Context} from '@sovrin/proximity-server';
+import {Context} from 'server';
 
 /**
  * User: Oleg Kamlowski <oleg.kamlowski@thomann.de>

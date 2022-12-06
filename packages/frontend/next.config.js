@@ -1,6 +1,5 @@
 const {resolve} = require('path');
 const {readdirSync, statSync} = require('fs');
-const withTM = require('next-transpile-modules');
 
 /**
  *
@@ -26,7 +25,7 @@ const getAliases = (path) => {
      * @returns {*}
      */
     const reduce = (acc, entry) => {
-        const alias = `${entry}`;
+        const alias = `#/${entry}`;
         acc[alias] = resolve(path, entry);
 
         return acc;
@@ -38,40 +37,44 @@ const getAliases = (path) => {
         ;
 };
 
-module.exports = withTM(['@thomann/spectre-react-components'])({
-    target: 'serverless',
-    future: {
-        webpack5: true,
-    },
-    publicRuntimeConfig: {
-        content: {},
-    },
-    async rewrites () {
-        return [
-            {
-                source: '/:path*',
-                destination: '/',
-            },
-            {
-                source: '/api/:path*',
-                destination: 'http://localhost:3100/:path*',
-            },
-            {
-                source: '/static/:path*',
-                destination: 'http://localhost:3100/static/:path*',
-            },
-        ];
-    },
-    webpack (config) {
-        config.module.rules.push({
-            test: /\.svg/,
-            type: 'asset/inline',
-        });
-        config.resolve.alias = {
-            ...config.resolve.alias,
-            ...getAliases(resolve(__dirname, 'src')),
-        };
+module.exports = (phase, {defaultConfig}) => {
+    /**
+     * @type {import('next').NextConfig}
+     */
+    const nextConfig = {
+        // target: 'serverless',
+        publicRuntimeConfig: {
+            content: {},
+        },
+        async rewrites () {
+            return [
+                {
+                    source: '/:path*',
+                    destination: '/',
+                },
+                {
+                    source: '/api/:path*',
+                    destination: 'http://localhost:3100/:path*',
+                },
+                {
+                    source: '/static/:path*',
+                    destination: 'http://localhost:3100/static/:path*',
+                },
+            ];
+        },
+        webpack (config) {
+            config.module.rules.push({
+                test: /\.svg/,
+                type: 'asset',
+            });
+            config.resolve.alias = {
+                ...config.resolve.alias,
+                ...getAliases(resolve(__dirname, 'src')),
+            };
 
-        return config;
-    },
-});
+            return config;
+        },
+    };
+
+    return nextConfig;
+};

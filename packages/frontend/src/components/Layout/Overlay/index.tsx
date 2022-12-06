@@ -1,5 +1,5 @@
 import React from 'react';
-import {Overlay as Base} from '@thomann/spectre-react-components/OffCanvas';
+// import {Overlay as Base} from '@thomann/spectre-react-components/OffCanvas';
 import Layout from '../Layout';
 import style from './Overlay.module.css';
 
@@ -10,7 +10,7 @@ import style from './Overlay.module.css';
  */
 const Overlay = () => (
     <Layout type="overlay">
-        <Base
+        <a
             className={style.overlay}
             href='#close'
         />

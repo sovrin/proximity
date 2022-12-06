@@ -1,22 +1,8 @@
 {
-  "name": "@sovrin/proximity-common",
-  "version": "1.0.0",
-  "description": "shared components for proximity",
+  "name": "common",
+  "version": "0.1.0",
   "main": "src/index.ts",
   "scripts": {
     "dev": "ts-node src/index.ts"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sovrin/proximity.git"
-  },
-  "author": {
-    "name": "Oleg Kamlowski",
-    "email": "oleg.kamlowski@thomann.de"
-  },
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/sovrin/proximity/issues"
-  },
-  "homepage": "https://github.com/sovrin/proximity#readme"
+  }
 }

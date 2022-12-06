@@ -1,5 +1,5 @@
 import React from 'react';
-import {Presence} from '@thomann/spectre-react-components/Avatar';
+// import {Presence} from '@thomann/spectre-react-components/Avatar';
 import {useConnection} from 'hooks';
 import {Status} from 'contexts/Connection';
 
@@ -11,28 +11,31 @@ import {Status} from 'contexts/Connection';
 const Connection = () => {
     const {status} = useConnection() as any;
 
-    let presence = Presence.Presence.OFFLINE;
 
-    switch (status) {
-        case Status.CONNECTED:
-            presence = Presence.Presence.ONLINE;
-            break;
-        case Status.ERROR:
-            presence = Presence.Presence.OFFLINE;
-            break;
-        case Status.IDLE:
-            presence = Presence.Presence.AWAY;
-            break;
-        case Status.CONNECTING:
-            presence = Presence.Presence.BUSY;
-            break;
-    }
+    return status;
 
-    console.info(presence);
+    // let presence = Presence.Presence.OFFLINE;
+    //
+    // switch (status) {
+    //     case Status.CONNECTED:
+    //         presence = Presence.Presence.ONLINE;
+    //         break;
+    //     case Status.ERROR:
+    //         presence = Presence.Presence.OFFLINE;
+    //         break;
+    //     case Status.IDLE:
+    //         presence = Presence.Presence.AWAY;
+    //         break;
+    //     case Status.CONNECTING:
+    //         presence = Presence.Presence.BUSY;
+    //         break;
+    // }
+    //
+    // console.info(presence);
 
-    return (
-        <Presence presence={presence}/>
-    );
+    // return (
+    //     <Presence presence={presence}/>
+    // );
 };
 
 /**

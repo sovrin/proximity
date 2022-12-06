@@ -1,4 +1,4 @@
-import {payload as payloadFactory} from '@sovrin/proximity-common';
+import {payload as payloadFactory} from 'common';
 import Socket from "./Adapter/Socket";
 import {Adapter} from './types';
 

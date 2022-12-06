@@ -1,15 +1,14 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "baseUrl": "src",
-    "outDir": "./dist"
-  },
-  "include": [
-    "./src"
-  ],
-  "references": [
-    {
-      "path": "../common"
+    "baseUrl": "./",
+    "paths": {
+      "*": [
+        "node_modules/*"
+      ],
+      "#/backend/*": [
+        "./*"
+      ]
     }
-  ]
+  }
 }

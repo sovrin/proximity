@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from '@thomann/classnames';
-import {Sidebar as Base} from '@thomann/spectre-react-components/OffCanvas';
+// import {Sidebar as Base} from '@thomann/spectre-react-components/OffCanvas';
 import Layout from '../Layout';
 import {usePage} from 'hooks';
 import style from './Sidebar.module.css';
@@ -19,12 +19,12 @@ const Sidebar = ({children}) => {
 
     return (
        <Layout type="sidebar">
-           <Base
-               className={className}
-               id={id}
-           >
+           {/*<Base*/}
+           {/*    className={className}*/}
+           {/*    id={id}*/}
+           {/*>*/}
                {children}
-           </Base>
+           {/*</Base>*/}
        </Layout>
     );
 };

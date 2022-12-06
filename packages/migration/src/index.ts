@@ -1,4 +1,4 @@
-import {utils} from '@sovrin/proximity-common';
+import {utils} from 'common';
 const factory = (root: string, to: string) => {
 
     const up = () => {

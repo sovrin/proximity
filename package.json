@@ -1,28 +1,29 @@
 {
   "name": "proximity",
-  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "frontend:dev": "lerna run --stream --no-prefix --scope @sovrin/proximity-frontend dev",
-    "frontend:build": "lerna run --stream --no-prefix --scope @sovrin/proximity-frontend build",
-    "backend:dev": "lerna run --stream --no-prefix --scope @sovrin/proximity-backend dev",
-    "backend:build": "lerna run --stream --no-prefix --scope @sovrin/proximity-backend build",
-    "server:build": "lerna run --stream --no-prefix --scope @sovrin/proximity-server build",
-    "adapter:build": "lerna run --stream --no-prefix --scope @sovrin/proximity-adapter build",
-    "adapter:dev": "lerna run --stream --no-prefix --scope @sovrin/proximity-adapter dev",
-    "adapter:test": "lerna run --stream --no-prefix --scope @sovrin/proximity-adapter test",
-    "bootstrap": "lerna bootstrap --hoist",
-    "clean": "lerna clean --yes",
-    "update": "npx lernaupdate"
+    "frontend:dev": "npm run dev --workspace=frontend",
+    "frontend:build": "npm run build --workspace=frontend",
+    "backend:dev": "npm run dev --workspace=backend",
+    "backend:build": "npm run build --workspace=backend",
+    "server:build": "npm run build --workspace=server",
+    "adapter:build": "npm run build --workspace=adapter",
+    "adapter:dev": "npm run dev --workspace=adapter",
+    "adapter:test": "npm run test --workspace=adapter"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^4.19.0",
-    "@typescript-eslint/parser": "^4.19.0",
-    "eslint": "^7.23.0",
-    "lerna": "^4.0.0",
-    "lerna-update-wizard": "^0.17.8",
-    "mocha": "^8.3.2",
-    "next-transpile-modules": "^6.3.0",
+    "@typescript-eslint/eslint-plugin": "^5.45.1",
+    "@typescript-eslint/parser": "^5.45.1",
+    "eslint": "^8.29.0",
+    "mocha": "^10.1.0",
     "nyc": "^15.1.0",
-    "typescript": "^4.2.3"
+    "typescript": "^4.9.3",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "^18.11.11",
+    "debug": "^4.3.4",
+    "ts-node": "^10.9.1"
   }
 }

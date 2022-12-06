@@ -1,6 +1,6 @@
 import React from 'react';
 import {useConfiguration} from 'hooks';
-import Menu, {Item, Divider} from '@thomann/spectre-react-components/Menu';
+// import Menu, {Item, Divider} from '@thomann/spectre-react-components/Menu';
 import {Icon, Link} from 'components';
 import style from './Navigation.module.css';
 
@@ -13,8 +13,8 @@ const Navigation = () => {
     const {state: {collapsed}} = useConfiguration();
 
     return (
-        <Menu className={style.navigation}>
-            <Item className={style.item}>
+        <ul className={style.navigation}>
+            <li className={style.item}>
                 <Link
                     className={style.link}
                     href="/alerts"
@@ -28,9 +28,9 @@ const Navigation = () => {
                         <span>Alerts</span>
                     )}
                 </Link>
-            </Item>
+            </li>
 
-            <Item className={style.item}>
+            <li className={style.item}>
                 <Link
                     className={style.link}
                     href="/feed"
@@ -44,9 +44,9 @@ const Navigation = () => {
                         <span>Feed</span>
                     )}
                 </Link>
-            </Item>
+            </li>
 
-            <Item className={style.item}>
+            <li className={style.item}>
                 <Link
                     className={style.link}
                     href="/flags">
@@ -59,11 +59,11 @@ const Navigation = () => {
                         <span>Flags</span>
                     )}
                 </Link>
-            </Item>
+            </li>
 
-            <Divider/>
+            <hr/>
 
-            <Item className={style.item}>
+            <li className={style.item}>
                 <Link
                     className={style.link}
                     href="/settings"
@@ -77,8 +77,8 @@ const Navigation = () => {
                         <span>Settings</span>
                     )}
                 </Link>
-            </Item>
-        </Menu>
+            </li>
+        </ul>
     );
 };
 

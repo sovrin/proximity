@@ -21,10 +21,11 @@
       "DOM"
     ],
     "paths": {
-      "*": [
+      "#/*": [
         "*"
       ]
-    }
+    },
+    "incremental": true
   },
   "include": [
     "**/*.ts",

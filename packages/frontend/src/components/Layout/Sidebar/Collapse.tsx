@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from '@thomann/spectre-react-components/Button';
+// import Button from '@thomann/spectre-react-components/Button';
 import {Icon} from 'components';
 import {useConfiguration} from 'hooks';
 import style from './Collapse.module.css';
@@ -19,12 +19,12 @@ const Collapse = () => {
     };
 
     return (
-        <Button
+        <button
             className={style.collapse}
             onClick={onClick}
-            size={Button.Size.SMALL}
-            link
-            block
+            // size={Button.Size.SMALL}
+            // link
+            // block
         >
             {(collapsed) && (
                 <Icon
@@ -41,7 +41,7 @@ const Collapse = () => {
                     type={Icon.Type.CHEVRON_SMALL_LEFT}
                 />
             )}
-        </Button>
+        </button>
     );
 };
 
